@@ -2,13 +2,24 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Inter:wght@700&family=JetBrains+Mono:wght@700&family=Oswald:wght@700&family=Rajdhani:wght@600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
+  :root {
+    --fonte-principal: 'Rajdhani', sans-serif;
+    --fonte-numeros: 'Share Tech Mono', monospace;
+    --cor-chamada: #ffffff;
+    --cor-like: #00ff00;
+    --cor-numeros: #ffffff;
+    --tamanho-texto: 20px;
+    --tamanho-numeros: 40px;
+  }
+
   body {
     background: transparent;
-    font-family: 'Rajdhani', sans-serif;
+    font-family: var(--fonte-principal);
+    overflow: hidden;
   }
 
   /* ========== WIDGET ========== */
@@ -22,6 +33,7 @@
     background-color: #000;
     border-radius: 8px;
     overflow: hidden;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
   }
 
   .barra-progresso {
@@ -57,23 +69,22 @@
   }
 
   .texto-chamada {
-    font-size: 20px;
+    font-size: var(--tamanho-texto);
     line-height: 1;
-    font-family: 'Rajdhani', sans-serif;
+    font-family: var(--fonte-principal);
     font-weight: 700;
-    letter-spacing: 1px;
-    color: var(--cor-chamada, #ffffff);
+    color: var(--cor-chamada);
   }
 
-  .verde { color: var(--cor-like, #00ff00); }
+  .verde { color: var(--cor-like); }
 
   .contador-likes {
-    font-size: 40px;
+    font-size: var(--tamanho-numeros);
     font-weight: 700;
     margin-top: 5px;
     line-height: 1;
-    font-family: 'Share Tech Mono', monospace;
-    color: var(--cor-numeros, #ffffff);
+    font-family: var(--fonte-numeros);
+    color: var(--cor-numeros);
   }
 
   @keyframes wiggleFloat {
@@ -85,359 +96,109 @@
   /* ========== PAINEL DE CONTROLE ========== */
   #painel {
     position: fixed;
-    bottom: 20px;
+    bottom: 10px;
     left: 50%;
     transform: translateX(-50%);
-    width: 560px;
+    width: 700px;
     background: #0f0f0f;
     border: 1px solid #2a2a2a;
     border-radius: 12px;
-    padding: 16px 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+    padding: 15px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.8);
+    z-index: 999;
   }
 
-  #painel h3 {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 11px;
-    color: #444;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    border-bottom: 1px solid #1a1a1a;
-    padding-bottom: 8px;
-  }
+  #painel h3 { grid-column: 1 / -1; font-size: 10px; color: #555; letter-spacing: 2px; text-transform: uppercase; border-bottom: 1px solid #222; padding-bottom: 5px; }
 
-  .painel-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-
-  .painel-label {
-    font-size: 12px;
-    color: #666;
-    font-family: 'Share Tech Mono', monospace;
-    min-width: 120px;
-    letter-spacing: 1px;
-  }
-
-  #status-badge {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 12px;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-weight: bold;
-    letter-spacing: 1px;
-    transition: all 0.3s;
-  }
-  .status-online  { background: #0a2a0a; color: #00ff44; border: 1px solid #00ff44; }
-  .status-offline { background: #2a1a00; color: #ff8800; border: 1px solid #ff8800; }
-  .status-erro    { background: #2a0000; color: #ff3333; border: 1px solid #ff3333; }
-  .status-aguard  { background: #1a1a2a; color: #6666ff; border: 1px solid #6666ff; }
-
-  #video-id-display {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 11px;
-    color: #444;
-    margin-left: 4px;
-  }
-
-  #sim-range {
-    -webkit-appearance: none;
-    width: 180px;
-    height: 4px;
-    background: #222;
-    border-radius: 2px;
-    outline: none;
-  }
-  #sim-range::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 14px; height: 14px;
-    border-radius: 50%;
-    background: #ff3333;
-    cursor: pointer;
-  }
-  #sim-valor {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 12px;
-    color: #ff3333;
-    min-width: 50px;
-  }
-
-  .btn {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    padding: 5px 14px;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.2s;
-    text-transform: uppercase;
-  }
-  .btn-sim    { background: #ff3333; color: #fff; }
-  .btn-sim:hover { background: #ff5555; }
-  .btn-real   { background: #1a1a1a; color: #888; border: 1px solid #333; }
-  .btn-real:hover { background: #222; color: #aaa; }
-  .btn-refresh { background: #1a2a1a; color: #00ff44; border: 1px solid #00ff44; }
-  .btn-refresh:hover { background: #223322; }
-
-  .cor-group {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .cor-group label {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 11px;
-    color: #555;
-    letter-spacing: 1px;
-  }
-  input[type="color"] {
-    -webkit-appearance: none;
-    width: 30px; height: 30px;
+  .secao { display: flex; flex-direction: column; gap: 8px; }
+  .painel-row { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #888; }
+  
+  select, input[type="number"], .btn {
+    background: #1a1a1a;
     border: 1px solid #333;
-    border-radius: 6px;
-    padding: 2px;
-    background: #111;
-    cursor: pointer;
-  }
-  input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
-  input[type="color"]::-webkit-color-swatch { border: none; border-radius: 4px; }
-
-  #meta-input {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 13px;
-    background: #111;
-    border: 1px solid #333;
-    border-radius: 6px;
     color: #fff;
-    padding: 4px 10px;
-    width: 100px;
+    padding: 5px;
+    border-radius: 4px;
     outline: none;
   }
-  #meta-input:focus { border-color: #555; }
 
-  .divisor { width: 100%; height: 1px; background: #1a1a1a; }
+  .btn { cursor: pointer; font-weight: bold; text-transform: uppercase; font-size: 10px; }
+  .btn:hover { background: #333; }
+  .btn-green { color: #00ff44; border-color: #00ff44; }
+
+  input[type="color"] { width: 30px; height: 30px; border: none; cursor: pointer; background: none; }
 </style>
 </head>
 <body>
 
-<!-- WIDGET -->
 <div class="widget-container">
   <div id="progresso" class="barra-progresso"></div>
   <img src="https://www.svgrepo.com/show/415785/thumbsup-ui-like.svg" class="icone-like-svg">
   <div class="area-textos">
-    <div class="texto-chamada">DEIXA O <span class="verde">LIKE!</span></div>
+    <div class="texto-chamada">DEIXA O <span class="verde" id="span-like">LIKE!</span></div>
     <div class="contador-likes">
       <span id="atual">...</span> / <span id="meta">0</span>
     </div>
   </div>
 </div>
 
-<!-- PAINEL (some no OBS automaticamente) -->
 <div id="painel">
-  <h3>⚙ Painel de Controle — Widget Likes</h3>
+  <h3>⚙ Customização Profissional</h3>
 
-  <div class="painel-row">
-    <span class="painel-label">STATUS API</span>
-    <span id="status-badge" class="status-aguard">AGUARDANDO</span>
-    <span id="video-id-display"></span>
+  <div class="secao">
+    <div class="painel-row">
+      <span>STATUS:</span>
+      <strong id="status-badge" style="color: #66f;">AGUARDANDO</strong>
+    </div>
+    <div class="painel-row">
+      <span>META:</span>
+      <input type="number" id="meta-input" value="2000" style="width: 70px;">
+      <button class="btn" onclick="aplicarMeta()">Definir</button>
+    </div>
+    <div class="painel-row">
+      <span>SIMULAR:</span>
+      <input type="range" id="sim-range" min="0" max="5000" value="500">
+      <button class="btn" onclick="simularLikes()">Testar</button>
+      <button class="btn" onclick="voltarReal()">Real</button>
+    </div>
   </div>
 
-  <div class="divisor"></div>
-
-  <div class="painel-row">
-    <span class="painel-label">SIMULAR LIKES</span>
-    <input type="range" id="sim-range" min="0" max="10000" value="500">
-    <span id="sim-valor">500</span>
-    <button class="btn btn-sim" onclick="simularLikes()">SIMULAR</button>
-    <button class="btn btn-real" onclick="voltarReal()">REAL</button>
-    <button class="btn btn-refresh" onclick="forcarAtualizacao()">↺ ATUALIZAR</button>
-  </div>
-
-  <div class="divisor"></div>
-
-  <div class="painel-row">
-    <span class="painel-label">META DE LIKES</span>
-    <input type="number" id="meta-input" value="2000" min="1">
-    <button class="btn btn-real" onclick="aplicarMeta()" style="border-color:#6666ff;color:#6666ff;">APLICAR</button>
-  </div>
-
-  <div class="divisor"></div>
-
-  <div class="painel-row">
-    <span class="painel-label">CORES</span>
-    <div class="cor-group">
-      <label>TEXTO</label>
-      <input type="color" id="cor-chamada" value="#ffffff" oninput="aplicarCores()">
+  <div class="secao">
+    <div class="painel-row">
+      <span>FONTE:</span>
+      <select id="select-fonte" onchange="mudarFonte()">
+        <option value="'Rajdhani'">Futurista (Rajdhani)</option>
+        <option value="'Bungee'">Gamer (Bungee)</option>
+        <option value="'Share Tech Mono'">Retro (Share Tech)</option>
+        <option value="'Oswald'">Impacto (Oswald)</option>
+        <option value="'JetBrains Mono'">Programador (JetBrains)</option>
+        <option value="'Inter'">Limpa (Inter)</option>
+      </select>
     </div>
-    <div class="cor-group">
-      <label>LIKE!</label>
-      <input type="color" id="cor-like" value="#00ff00" oninput="aplicarCores()">
+    <div class="painel-row">
+      <span>CORES:</span>
+      <input type="color" id="cp-texto" value="#ffffff" oninput="aplicarCores()">
+      <input type="color" id="cp-like" value="#00ff00" oninput="aplicarCores()">
+      <input type="color" id="cp-barra" value="#ff0000" oninput="aplicarCores()">
     </div>
-    <div class="cor-group">
-      <label>NÚMEROS</label>
-      <input type="color" id="cor-numeros" value="#ffffff" oninput="aplicarCores()">
-    </div>
-    <div class="cor-group">
-      <label>BARRA</label>
-      <input type="color" id="cor-barra" value="#ff0000" oninput="aplicarCores()">
+    <div class="painel-row">
+        <button class="btn btn-green" onclick="forcarAtualizacao()">↺ RECARREGAR LIVE</button>
     </div>
   </div>
 </div>
 
 <script>
-  // ========== CONFIGURAÇÕES ==========
-  const API_KEY    = "AIzaSyCRU3nsWj1uZcfLQfOxFOzX8IRxr_C1--s";
+  const API_KEY = "SUA_KEY_AQUI"; // Lembre de colocar sua Key
   const CHANNEL_ID = "UCjrBK9DwokyeeIIECJvaFyQ";
-  let META_LIKES   = 2000;
-  // ====================================
-
-  let liveVideoId  = null;
+  let META_LIKES = 2000;
+  let liveVideoId = null;
   let modoSimulado = false;
 
-  // Detecta OBS e esconde painel
-  if (navigator.userAgent.includes("OBS")) {
-    document.getElementById('painel').style.display = 'none';
-  }
-
-  // Slider
-  document.getElementById('sim-range').addEventListener('input', function() {
-    document.getElementById('sim-valor').innerText = parseInt(this.value).toLocaleString('pt-BR');
-  });
-
-  function setStatus(tipo, texto, videoId) {
-    const badge = document.getElementById('status-badge');
-    badge.className = 'status-' + tipo;
-    badge.innerText = texto;
-    document.getElementById('video-id-display').innerText = videoId ? '• ' + videoId : '';
-  }
+  // Esconde painel no OBS
+  if (navigator.userAgent.includes("OBS")) document.getElementById('painel').style.display = 'none';
 
   function aplicarCores() {
-    const r = document.documentElement.style;
-    r.setProperty('--cor-chamada', document.getElementById('cor-chamada').value);
-    r.setProperty('--cor-like',    document.getElementById('cor-like').value);
-    r.setProperty('--cor-numeros', document.getElementById('cor-numeros').value);
-    document.getElementById('progresso').style.backgroundColor = document.getElementById('cor-barra').value;
-  }
-
-  function aplicarMeta() {
-    META_LIKES = parseInt(document.getElementById('meta-input').value) || 2000;
-    document.getElementById('meta').innerText = META_LIKES.toLocaleString('pt-BR');
-  }
-
-  function simularLikes() {
-    modoSimulado = true;
-    const val = parseInt(document.getElementById('sim-range').value);
-    updateUI(val, META_LIKES);
-    setStatus('aguard', 'SIMULANDO', null);
-  }
-
-  function voltarReal() {
-    modoSimulado = false;
-    setStatus('aguard', 'AGUARDANDO', null);
-    init();
-  }
-
-  async function forcarAtualizacao() {
-    if (modoSimulado) return;
-    liveVideoId = null;
-    setStatus('aguard', 'BUSCANDO...', null);
-    await buscarLiveId();
-    if (liveVideoId) await atualizarLikes();
-  }
-
-  async function buscarLiveId() {
-    try {
-      const r = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${CHANNEL_ID}&eventType=live&type=video&maxResults=1&key=${API_KEY}`);
-      const data = await r.json();
-
-      if (data.error) {
-        document.getElementById('atual').innerText = "ERRO " + data.error.code;
-        setStatus('erro', 'ERRO ' + data.error.code, null);
-        liveVideoId = null;
-        return;
-      }
-
-      if (!data.items || data.items.length === 0) {
-        document.getElementById('atual').innerText = "OFFLINE";
-        setStatus('offline', 'OFFLINE', null);
-        liveVideoId = null;
-        return;
-      }
-
-      liveVideoId = data.items[0].id.videoId;
-      setStatus('aguard', 'LIVE ENCONTRADA', liveVideoId);
-
-    } catch (e) {
-      document.getElementById('atual').innerText = "OFFLINE";
-      setStatus('erro', 'ERRO REDE', null);
-      liveVideoId = null;
-    }
-  }
-
-  async function atualizarLikes() {
-    if (!liveVideoId || modoSimulado) return;
-    try {
-      const r = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=statistics,snippet&id=${liveVideoId}&key=${API_KEY}`);
-      const data = await r.json();
-
-      if (!data.items || data.items.length === 0) {
-        document.getElementById('atual').innerText = "OFFLINE";
-        setStatus('offline', 'OFFLINE', null);
-        liveVideoId = null;
-        return;
-      }
-
-      const video = data.items[0];
-
-      if (video.snippet.liveBroadcastContent !== "live") {
-        document.getElementById('atual').innerText = "OFFLINE";
-        setStatus('offline', 'LIVE ENCERRADA', null);
-        liveVideoId = null;
-        return;
-      }
-
-      updateUI(video.statistics.likeCount, META_LIKES);
-      setStatus('online', 'ON LINE', liveVideoId);
-
-    } catch (e) {
-      document.getElementById('atual').innerText = "OFFLINE";
-      setStatus('erro', 'ERRO REDE', null);
-    }
-  }
-
-  function updateUI(cur, max) {
-    document.getElementById('atual').innerText = parseInt(cur).toLocaleString('pt-BR');
-    document.getElementById('meta').innerText  = parseInt(max).toLocaleString('pt-BR');
-    document.getElementById('progresso').style.width = Math.min((cur / max) * 100, 100) + "%";
-  }
-
-  async function init() {
-    if (modoSimulado) return;
-    await buscarLiveId();
-    if (liveVideoId) await atualizarLikes();
-  }
-
-  setInterval(async () => {
-    if (modoSimulado) return;
-    if (liveVideoId) await atualizarLikes();
-    else { await buscarLiveId(); if (liveVideoId) await atualizarLikes(); }
-  }, 60000);
-
-  setInterval(async () => {
-    if (modoSimulado) return;
-    liveVideoId = null;
-    await buscarLiveId();
-    if (liveVideoId) await atualizarLikes();
-  }, 600000);
-
-  init();
-</script>
-</body>
-</html>
+    const root = document.documentElement
