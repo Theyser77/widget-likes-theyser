@@ -2,7 +2,8 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Share+Tech+Mono&family=Orbitron:wght@700;900&family=Press+Start+2P&family=Bebas+Neue&family=Righteous&family=Russo+One&family=Audiowide&family=Black+Ops+One&family=Exo+2:wght@700;900&family=Teko:wght@600;700&family=Chakra+Petch:wght@600;700&family=VT323&family=Bungee&family=Permanent+Marker&display=swap" rel="stylesheet">
+<!-- Fontes expandidas - 50+ fontes populares do Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Share+Tech+Mono&family=Orbitron:wght@700;900&family=Press+Start+2P&family=Bebas+Neue&family=Righteous&family=Russo+One&family=Audiowide&family=Black+Ops+One&family=Exo+2:wght@700;900&family=Teko:wght@600;700&family=Chakra+Petch:wght@600;700&family=VT323&family=Bungee&family=Permanent+Marker&family=Montserrat:wght@400;700&family=Poppins:wght@400;700&family=Oswald:wght@400;700&family=Roboto:wght@400;700&family=Anton&family=Major+Mono+Display&family=Saira:wght@400;700&family=Barlow:wght@400;700&family=Nunito:wght@400;700&family=Alfa+Slab+One&family=Archivo+Black:wght@400;700&family=Titillium+Web:wght@400;700&family=Barlow+Condensed:wght@400;700&family=Space+Grotesk:wght@400;700&family=Geist:wght@400;700&family=Comfortaa:wght@400;700&family=Josefin+Sans:wght@400;700&family=Lato:wght@400;700&family=Open+Sans:wght@400;700&family=Raleway:wght@400;700&family=Source+Sans+Pro:wght@400;700&family=Ubuntu:wght@400;700&family=Kanit:wght@400;700&family=Quicksand:wght@400;700&family=Rubik:wght@400;700&family=Work+Sans:wght@400;700&family=Yanone+Kaffeesatz:wght@400;700&family=Zilla+Slab:wght@400;700&family=Abril+Fatface&family=Aladin&family=Aldrich&family=Allerta+Stencil&family=Baloo+2:wght@400;700&family=Barriecito&family=Bungee+Shade&family=Cabin+Sketch:wght@400;700&family=Caveat:wght@400;700&family=Cinzel:wght@400;700&family=Coda+Caption:wght@400;700&family=Courgette&family=Crimson+Text:wght@400;700&family=Dancing+Script:wght@400;700&family=Economica:wght@400;700&family=Fjalla+One&family=Fredoka+One&family=Gloria+Hallelujah&family=Great+Vibes&family=Indie+Flower&family=Lobster&family=Luckiest+Guy&family=Monoton&family=Pacifico&family=Patua+One&family=Playfair+Display:wght@400;700&family=Righteous&family=Sacramento&family=Shadows+Into+Light&family=Sigmar+One&family=Staatliches&family=Titan+One&family=Vollkorn:wght@400;700&family=Yellowtail&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -142,6 +143,100 @@
   .anim-flicker   { animation: flicker 2s linear infinite; }
   .anim-heartbeat { animation: heartbeat 1.3s ease-in-out infinite; }
   .anim-none      { animation: none; }
+
+  /* ========== ANIMAÇÕES DA BARRA ========== */
+  @keyframes barraOndas {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+  }
+  
+  @keyframes barraBolhas {
+    0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); }
+    50% { box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.3); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+  }
+  
+  @keyframes barraPulsar {
+    0%, 100% { transform: scaleX(1); opacity: 1; }
+    50% { transform: scaleX(1.05); opacity: 0.8; }
+  }
+  
+  @keyframes barraGlitch {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-2px); }
+    40% { transform: translateX(2px); }
+    60% { transform: translateX(-1px); }
+    80% { transform: translateX(1px); }
+    100% { transform: translateX(0); }
+  }
+  
+  @keyframes barraFogo {
+    0% { background-position: 0% 50%; filter: hue-rotate(0deg); }
+    50% { background-position: 100% 50%; filter: hue-rotate(180deg); }
+    100% { background-position: 0% 50%; filter: hue-rotate(360deg); }
+  }
+  
+  @keyframes barraScan {
+    0% { background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent); background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  
+  @keyframes barraEnergia {
+    0% { box-shadow: 0 0 5px 0 #00ffff, inset 0 0 5px 0 #00ffff; }
+    50% { box-shadow: 0 0 20px 5px #00ffff, inset 0 0 10px 0 #00ffff; }
+    100% { box-shadow: 0 0 5px 0 #00ffff, inset 0 0 5px 0 #00ffff; }
+  }
+  
+  @keyframes barraLiquid {
+    0% { border-radius: 60% 40% 30% 70%/60% 30% 70% 40%; }
+    50% { border-radius: 30% 60% 70% 40%/50% 60% 30% 60%; }
+    100% { border-radius: 60% 40% 30% 70%/60% 30% 70% 40%; }
+  }
+
+  .barra-ondas {
+    background: linear-gradient(90deg, #ff0000, #ff9900, #ffff00, #00ff00, #0099ff, #9900ff);
+    background-size: 200% 100%;
+    animation: barraOndas 3s linear infinite;
+  }
+  
+  .barra-bolhas {
+    animation: barraBolhas 2s ease-in-out infinite;
+  }
+  
+  .barra-pulsar {
+    animation: barraPulsar 1.5s ease-in-out infinite;
+    transform-origin: left center;
+  }
+  
+  .barra-glitch {
+    animation: barraGlitch 0.5s ease-in-out infinite;
+  }
+  
+  .barra-fogo {
+    background: linear-gradient(90deg, #ff0000, #ff5500, #ffaa00, #ffff00);
+    background-size: 200% 100%;
+    animation: barraFogo 2s linear infinite;
+  }
+  
+  .barra-scan {
+    position: relative;
+    overflow: hidden;
+  }
+  .barra-scan::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+    animation: barraScan 2s linear infinite;
+  }
+  
+  .barra-energia {
+    animation: barraEnergia 1s ease-in-out infinite;
+  }
+  
+  .barra-liquid {
+    animation: barraLiquid 3s ease-in-out infinite;
+  }
 
   /* ========== PAINEL ========== */
   #painel {
@@ -585,6 +680,33 @@
     border-radius: 6px;
     border: 1px solid #333;
   }
+
+  /* Input custom de ícone */
+  .custom-icon-input {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex: 1;
+  }
+  .custom-icon-input input {
+    flex: 1;
+    min-width: 200px;
+  }
+  .custom-icon-preview {
+    width: 28px;
+    height: 28px;
+    border: 1px solid #333;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #111;
+    overflow: hidden;
+  }
+  .custom-icon-preview img {
+    max-width: 24px;
+    max-height: 24px;
+  }
 </style>
 </head>
 <body>
@@ -614,6 +736,7 @@
     <button class="tab-btn ativo" onclick="mudarAba('status')">📡 STATUS</button>
     <button class="tab-btn" onclick="mudarAba('tipografia')">🔤 FONTES</button>
     <button class="tab-btn" onclick="mudarAba('animacao')">✨ ANIMAÇÃO</button>
+    <button class="tab-btn" onclick="mudarAba('animacao-barra')">🌊 BARRA</button>
     <button class="tab-btn" onclick="mudarAba('cores')">🎨 CORES</button>
     <button class="tab-btn" onclick="mudarAba('layout')">📐 LAYOUT</button>
     <button class="tab-btn" onclick="mudarAba('textos')">✏️ TEXTOS</button>
@@ -732,6 +855,19 @@
     <div class="divisor"></div>
 
     <div class="painel-row">
+      <span class="painel-label">ÍCONE CUSTOM</span>
+      <div class="custom-icon-input">
+        <input type="text" id="custom-icon-url" class="input-text" placeholder="Cole URL do ícone (SVG/PNG)" style="flex:1;">
+        <div class="custom-icon-preview" id="custom-icon-preview">
+          <img src="" id="custom-icon-img" style="display:none;">
+        </div>
+        <button class="btn btn-blue" onclick="aplicarIconeCustom()">APLICAR</button>
+      </div>
+    </div>
+
+    <div class="divisor"></div>
+
+    <div class="painel-row">
       <span class="painel-label">TAMANHO ÍCONE</span>
       <input type="range" class="slider-custom size-slider" id="icon-size-range" min="30" max="100" value="60" oninput="aplicarTamanhoIcone()">
       <span id="icon-size-valor" class="valor-label">60px</span>
@@ -799,6 +935,71 @@
 
   </div>
 
+  <!-- ========== ABA: ANIMAÇÃO DA BARRA ========== -->
+  <div class="tab-content scrollbar-style" id="tab-animacao-barra" style="overflow-y:auto;max-height:220px;">
+
+    <div class="painel-row" style="align-items:flex-start;">
+      <span class="painel-label" style="padding-top:6px;">ANIMAÇÃO BARRA</span>
+      <div class="anim-grid" style="flex:1;">
+        <div class="anim-card selecionada" onclick="selecionarAnimBarra(this,'solid')">
+          <div style="width:28px;height:28px;background:#ff0000;border-radius:4px;"></div>
+          <span>SÓLIDA</span>
+        </div>
+        <div class="anim-card" onclick="selecionarAnimBarra(this,'ondas')">
+          <div style="width:28px;height:28px;background:linear-gradient(90deg,#ff0000,#ff9900,#ffff00);border-radius:4px;"></div>
+          <span>ONDAS</span>
+        </div>
+        <div class="anim-card" onclick="selecionarAnimBarra(this,'bolhas')">
+          <div style="width:28px;height:28px;background:#ff0000;border-radius:50%;"></div>
+          <span>BOLHAS</span>
+        </div>
+        <div class="anim-card" onclick="selecionarAnimBarra(this,'pulsar')">
+          <div style="width:28px;height:28px;background:#ff0000;border-radius:4px;"></div>
+          <span>PULSAR</span>
+        </div>
+        <div class="anim-card" onclick="selecionarAnimBarra(this,'glitch')">
+          <div style="width:28px;height:28px;background:#ff0000;border-radius:4px;"></div>
+          <span>GLITCH</span>
+        </div>
+        <div class="anim-card" onclick="selecionarAnimBarra(this,'fogo')">
+          <div style="width:28px;height:28px;background:linear-gradient(90deg,#ff0000,#ff5500);border-radius:4px;"></div>
+          <span>FOGO</span>
+        </div>
+        <div class="anim-card" onclick="selecionarAnimBarra(this,'scan')">
+          <div style="width:28px;height:28px;background:#ff0000;border-radius:4px;position:relative;overflow:hidden;">
+            <div style="position:absolute;top:0;left:0;right:0;height:4px;background:white;"></div>
+          </div>
+          <span>SCAN</span>
+        </div>
+        <div class="anim-card" onclick="selecionarAnimBarra(this,'energia')">
+          <div style="width:28px;height:28px;background:#00ffff;border-radius:4px;"></div>
+          <span>ENERGIA</span>
+        </div>
+        <div class="anim-card" onclick="selecionarAnimBarra(this,'liquid')">
+          <div style="width:28px;height:28px;background:#ff0000;border-radius:60% 40% 30% 70%/60% 30% 70% 40%;"></div>
+          <span>LÍQUIDO</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="divisor"></div>
+
+    <div class="painel-row">
+      <span class="painel-label">VELOCIDADE</span>
+      <input type="range" class="slider-custom" id="barra-speed-range" min="0.5" max="3" step="0.1" value="1" style="width:130px;" oninput="aplicarVelocidadeBarra()">
+      <span id="barra-speed-valor" class="valor-label">1x</span>
+    </div>
+
+    <div class="divisor"></div>
+
+    <div class="painel-row">
+      <span class="painel-label">INTENSIDADE</span>
+      <input type="range" class="slider-custom" id="barra-intensity-range" min="1" max="10" value="5" style="width:130px;" oninput="aplicarIntensidadeBarra()">
+      <span id="barra-intensity-valor" class="valor-label">5</span>
+    </div>
+
+  </div>
+
   <!-- ========== ABA: CORES ========== -->
   <div class="tab-content scrollbar-style" id="tab-cores" style="overflow-y:auto;max-height:220px;">
 
@@ -833,26 +1034,6 @@
         <span class="toggle-label">COR CUSTOM</span>
       </div>
       <input type="color" id="cor-icone" value="#ffffff" oninput="aplicarCorIcone()">
-    </div>
-
-    <div class="divisor"></div>
-
-    <div class="painel-row">
-      <span class="painel-label">ESTILO BARRA</span>
-      <div class="style-grid">
-        <div class="style-card selecionada" onclick="selecionarEstiloBarra(this,'solid')">SÓLIDA</div>
-        <div class="style-card" onclick="selecionarEstiloBarra(this,'gradient')">GRADIENTE</div>
-        <div class="style-card" onclick="selecionarEstiloBarra(this,'pulse')">PULSANTE</div>
-        <div class="style-card" onclick="selecionarEstiloBarra(this,'rainbow')">RAINBOW</div>
-        <div class="style-card" onclick="selecionarEstiloBarra(this,'glow')">GLOW</div>
-      </div>
-    </div>
-
-    <div class="divisor"></div>
-
-    <div class="painel-row" id="row-gradient" style="display:none;">
-      <span class="painel-label">COR 2 GRADIENT</span>
-      <input type="color" id="cor-barra2" value="#ff9900" oninput="aplicarEstiloBarra()">
     </div>
 
   </div>
@@ -975,9 +1156,11 @@
   let formatoContador = 'atual/meta';
   let likesAtual = 0;
   let posBarra = 'bottom';
-  let estiloBarra = 'solid';
+  let animBarraAtual = 'solid';
+  let velocidadeBarra = 1;
+  let intensidadeBarra = 5;
 
-  // ========== FONTES DISPONÍVEIS ==========
+  // ========== FONTES DISPONÍVEIS (50+ fontes) ==========
   const FONTES = [
     { nome: 'Rajdhani',        family: "'Rajdhani', sans-serif" },
     { nome: 'Orbitron',        family: "'Orbitron', sans-serif" },
@@ -994,6 +1177,67 @@
     { nome: 'VT323',           family: "'VT323', monospace" },
     { nome: 'Bungee',          family: "'Bungee', cursive" },
     { nome: 'Permanent Marker',family: "'Permanent Marker', cursive" },
+    { nome: 'Montserrat',      family: "'Montserrat', sans-serif" },
+    { nome: 'Poppins',         family: "'Poppins', sans-serif" },
+    { nome: 'Oswald',          family: "'Oswald', sans-serif" },
+    { nome: 'Roboto',          family: "'Roboto', sans-serif" },
+    { nome: 'Anton',           family: "'Anton', sans-serif" },
+    { nome: 'Major Mono Display', family: "'Major Mono Display', monospace" },
+    { nome: 'Saira',           family: "'Saira', sans-serif" },
+    { nome: 'Barlow',          family: "'Barlow', sans-serif" },
+    { nome: 'Nunito',          family: "'Nunito', sans-serif" },
+    { nome: 'Alfa Slab One',   family: "'Alfa Slab One', cursive" },
+    { nome: 'Archivo Black',   family: "'Archivo Black', sans-serif" },
+    { nome: 'Titillium Web',   family: "'Titillium Web', sans-serif" },
+    { nome: 'Barlow Condensed',family: "'Barlow Condensed', sans-serif" },
+    { nome: 'Space Grotesk',   family: "'Space Grotesk', sans-serif" },
+    { nome: 'Geist',           family: "'Geist', sans-serif" },
+    { nome: 'Comfortaa',       family: "'Comfortaa', sans-serif" },
+    { nome: 'Josefin Sans',    family: "'Josefin Sans', sans-serif" },
+    { nome: 'Lato',            family: "'Lato', sans-serif" },
+    { nome: 'Open Sans',       family: "'Open Sans', sans-serif" },
+    { nome: 'Raleway',         family: "'Raleway', sans-serif" },
+    { nome: 'Source Sans Pro', family: "'Source Sans Pro', sans-serif" },
+    { nome: 'Ubuntu',          family: "'Ubuntu', sans-serif" },
+    { nome: 'Kanit',           family: "'Kanit', sans-serif" },
+    { nome: 'Quicksand',       family: "'Quicksand', sans-serif" },
+    { nome: 'Rubik',           family: "'Rubik', sans-serif" },
+    { nome: 'Work Sans',       family: "'Work Sans', sans-serif" },
+    { nome: 'Yanone Kaffeesatz', family: "'Yanone Kaffeesatz', sans-serif" },
+    { nome: 'Zilla Slab',      family: "'Zilla Slab', serif" },
+    { nome: 'Abril Fatface',   family: "'Abril Fatface', cursive" },
+    { nome: 'Aladin',          family: "'Aladin', cursive" },
+    { nome: 'Aldrich',         family: "'Aldrich', sans-serif" },
+    { nome: 'Allerta Stencil', family: "'Allerta Stencil', sans-serif" },
+    { nome: 'Baloo 2',         family: "'Baloo 2', cursive" },
+    { nome: 'Barriecito',      family: "'Barriecito', cursive" },
+    { nome: 'Bungee Shade',    family: "'Bungee Shade', cursive" },
+    { nome: 'Cabin Sketch',    family: "'Cabin Sketch', cursive" },
+    { nome: 'Caveat',          family: "'Caveat', cursive" },
+    { nome: 'Cinzel',          family: "'Cinzel', serif" },
+    { nome: 'Coda Caption',    family: "'Coda Caption', sans-serif" },
+    { nome: 'Courgette',       family: "'Courgette', cursive" },
+    { nome: 'Crimson Text',    family: "'Crimson Text', serif" },
+    { nome: 'Dancing Script',  family: "'Dancing Script', cursive" },
+    { nome: 'Economica',       family: "'Economica', sans-serif" },
+    { nome: 'Fjalla One',      family: "'Fjalla One', sans-serif" },
+    { nome: 'Fredoka One',     family: "'Fredoka One', cursive" },
+    { nome: 'Gloria Hallelujah', family: "'Gloria Hallelujah', cursive" },
+    { nome: 'Great Vibes',     family: "'Great Vibes', cursive" },
+    { nome: 'Indie Flower',    family: "'Indie Flower', cursive" },
+    { nome: 'Lobster',         family: "'Lobster', cursive" },
+    { nome: 'Luckiest Guy',    family: "'Luckiest Guy', cursive" },
+    { nome: 'Monoton',         family: "'Monoton', cursive" },
+    { nome: 'Pacifico',        family: "'Pacifico', cursive" },
+    { nome: 'Patua One',       family: "'Patua One', cursive" },
+    { nome: 'Playfair Display',family: "'Playfair Display', serif" },
+    { nome: 'Sacramento',      family: "'Sacramento', cursive" },
+    { nome: 'Shadows Into Light', family: "'Shadows Into Light', cursive" },
+    { nome: 'Sigmar One',      family: "'Sigmar One', cursive" },
+    { nome: 'Staatliches',     family: "'Staatliches', cursive" },
+    { nome: 'Titan One',       family: "'Titan One', cursive" },
+    { nome: 'Vollkorn',        family: "'Vollkorn', serif" },
+    { nome: 'Yellowtail',      family: "'Yellowtail', cursive" }
   ];
 
   // Detecta OBS
@@ -1056,7 +1300,7 @@
   // ========== ABAS ==========
   function mudarAba(nome) {
     document.querySelectorAll('.tab-btn').forEach((b,i) => {
-      const ids = ['status','tipografia','animacao','cores','layout','textos'];
+      const ids = ['status','tipografia','animacao','animacao-barra','cores','layout','textos'];
       b.classList.toggle('ativo', ids[i] === nome);
     });
     document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('ativo'));
@@ -1110,7 +1354,7 @@
     r.setProperty('--cor-chamada', document.getElementById('cor-chamada').value);
     r.setProperty('--cor-like',    document.getElementById('cor-like').value);
     r.setProperty('--cor-numeros', document.getElementById('cor-numeros').value);
-    aplicarEstiloBarra();
+    aplicarAnimBarra();
   }
 
   function aplicarCorFundo() {
@@ -1138,7 +1382,6 @@
 
   // Filter trick básico para colorir ícone
   function svgColorFilter(hex) {
-    // simplificado: usa invert + sepia + saturate para aproximar a cor
     const r = parseInt(hex.slice(1,3),16)/255;
     const g = parseInt(hex.slice(3,5),16)/255;
     const b = parseInt(hex.slice(5,7),16)/255;
@@ -1149,42 +1392,69 @@
     return 'brightness(0) invert(1)';
   }
 
-  // ========== ESTILO BARRA ==========
-  let barraAnimInterval = null;
-  function aplicarEstiloBarra() {
+  // ========== ANIMAÇÕES DA BARRA ==========
+  function aplicarAnimBarra() {
     const barra = document.getElementById('progresso');
     const cor1  = document.getElementById('cor-barra').value;
-    const cor2  = document.getElementById('cor-barra2') ? document.getElementById('cor-barra2').value : '#ff9900';
-
-    if (barraAnimInterval) clearInterval(barraAnimInterval);
+    
+    // Remove todas as classes de animação
+    barra.className = 'barra-progresso';
     barra.style.animation = 'none';
+    barra.style.background = cor1;
+    barra.style.boxShadow = 'none';
+    barra.style.borderRadius = '0';
 
-    if (estiloBarra === 'solid') {
-      barra.style.background = cor1;
-      barra.style.boxShadow = 'none';
-    } else if (estiloBarra === 'gradient') {
-      barra.style.background = `linear-gradient(90deg, ${cor1}, ${cor2})`;
-      barra.style.boxShadow = 'none';
-    } else if (estiloBarra === 'pulse') {
-      barra.style.background = cor1;
-      barra.style.animation = 'barraPulse 1s ease-in-out infinite';
-    } else if (estiloBarra === 'rainbow') {
-      barra.style.background = 'linear-gradient(90deg, #ff0000, #ff9900, #ffff00, #00ff00, #0099ff, #9900ff)';
-      barra.style.backgroundSize = '200% 100%';
-      barra.style.animation = 'rainbowMove 2s linear infinite';
-    } else if (estiloBarra === 'glow') {
-      barra.style.background = cor1;
-      barra.style.boxShadow = `0 0 12px 4px ${cor1}`;
+    if (animBarraAtual === 'solid') {
+      // Já está aplicado acima
+    } else if (animBarraAtual === 'ondas') {
+      barra.classList.add('barra-ondas');
+      barra.style.animationDuration = (3 / velocidadeBarra) + 's';
+    } else if (animBarraAtual === 'bolhas') {
+      barra.classList.add('barra-bolhas');
+      barra.style.animationDuration = (2 / velocidadeBarra) + 's';
+      barra.style.borderRadius = '50%';
+    } else if (animBarraAtual === 'pulsar') {
+      barra.classList.add('barra-pulsar');
+      barra.style.animationDuration = (1.5 / velocidadeBarra) + 's';
+    } else if (animBarraAtual === 'glitch') {
+      barra.classList.add('barra-glitch');
+      barra.style.animationDuration = (0.5 / velocidadeBarra) + 's';
+    } else if (animBarraAtual === 'fogo') {
+      barra.classList.add('barra-fogo');
+      barra.style.animationDuration = (2 / velocidadeBarra) + 's';
+    } else if (animBarraAtual === 'scan') {
+      barra.classList.add('barra-scan');
+      barra.style.animationDuration = (2 / velocidadeBarra) + 's';
+    } else if (animBarraAtual === 'energia') {
+      barra.classList.add('barra-energia');
+      barra.style.animationDuration = (1 / velocidadeBarra) + 's';
+      barra.style.background = '#00ffff';
+    } else if (animBarraAtual === 'liquid') {
+      barra.classList.add('barra-liquid');
+      barra.style.animationDuration = (3 / velocidadeBarra) + 's';
     }
   }
 
-  function selecionarEstiloBarra(el, tipo) {
-    document.querySelectorAll('#tab-cores .style-card').forEach(c => c.classList.remove('selecionada'));
+  function selecionarAnimBarra(el, tipo) {
+    document.querySelectorAll('#tab-animacao-barra .anim-card').forEach(c => c.classList.remove('selecionada'));
     el.classList.add('selecionada');
-    estiloBarra = tipo;
-    const rowGrad = document.getElementById('row-gradient');
-    rowGrad.style.display = tipo === 'gradient' ? 'flex' : 'none';
-    aplicarEstiloBarra();
+    animBarraAtual = tipo;
+    aplicarAnimBarra();
+  }
+
+  function aplicarVelocidadeBarra() {
+    const v = parseFloat(document.getElementById('barra-speed-range').value);
+    velocidadeBarra = v;
+    document.getElementById('barra-speed-valor').innerText = v + 'x';
+    aplicarAnimBarra();
+  }
+
+  function aplicarIntensidadeBarra() {
+    const v = parseInt(document.getElementById('barra-intensity-range').value);
+    intensidadeBarra = v;
+    document.getElementById('barra-intensity-valor').innerText = v;
+    // Aplica intensidade nas animações que suportam
+    aplicarAnimBarra();
   }
 
   // ========== POSIÇÃO DA BARRA ==========
@@ -1203,7 +1473,7 @@
     } else if (pos === 'full') {
       barra.style.cssText = 'position:absolute;top:0;left:0;height:100%;width:0%;transition:width 1.5s ease-in-out;z-index:1;opacity:0.35;';
     }
-    aplicarEstiloBarra();
+    aplicarAnimBarra();
     updateUI(likesAtual, META_LIKES);
   }
 
@@ -1217,7 +1487,9 @@
     document.querySelectorAll('.icon-card').forEach(c => c.classList.remove('selecionada'));
     el.classList.add('selecionada');
     document.getElementById('icone-like').src = url;
-    el.querySelector('img').src = url;
+    // Atualiza preview do custom icon
+    document.getElementById('custom-icon-img').src = url;
+    document.getElementById('custom-icon-img').style.display = 'block';
   }
 
   function aplicarTamanhoIcone() {
@@ -1225,6 +1497,44 @@
     document.getElementById('icon-size-valor').innerText = v + 'px';
     document.getElementById('icone-like').style.width = v + 'px';
   }
+
+  // ========== ICONE CUSTOM ==========
+  function aplicarIconeCustom() {
+    const url = document.getElementById('custom-icon-url').value.trim();
+    if (!url) return;
+    
+    // Valida URL básica
+    if (!url.startsWith('http')) {
+      alert('Por favor, insira uma URL válida começando com http:// ou https://');
+      return;
+    }
+    
+    // Testa carregamento da imagem
+    const img = new Image();
+    img.onload = function() {
+      document.getElementById('icone-like').src = url;
+      document.getElementById('custom-icon-img').src = url;
+      document.getElementById('custom-icon-img').style.display = 'block';
+      // Desmarca ícones pré-definidos
+      document.querySelectorAll('.icon-card').forEach(c => c.classList.remove('selecionada'));
+    };
+    img.onerror = function() {
+      alert('Erro ao carregar o ícone. Verifique a URL.');
+    };
+    img.src = url;
+  }
+
+  // Preview do ícone custom ao digitar
+  document.getElementById('custom-icon-url').addEventListener('input', function() {
+    const url = this.value.trim();
+    const previewImg = document.getElementById('custom-icon-img');
+    if (url && url.startsWith('http')) {
+      previewImg.src = url;
+      previewImg.style.display = 'block';
+    } else {
+      previewImg.style.display = 'none';
+    }
+  });
 
   // ========== ANIMAÇÕES ==========
   let animAtual = 'anim-wiggle';
@@ -1343,14 +1653,10 @@
   // ========== UPDATE UI ==========
   function updateUI(cur, max) {
     likesAtual = parseInt(cur) || 0;
-    const el = document.getElementById('atual');
-    const elMeta = document.getElementById('meta');
     const pct = Math.min((likesAtual / max) * 100, 100);
     const faltam = Math.max(max - likesAtual, 0);
 
     if (formatoContador === 'atual/meta') {
-      el.innerText = likesAtual.toLocaleString('pt-BR');
-      elMeta.innerText = parseInt(max).toLocaleString('pt-BR');
       document.getElementById('contador').innerHTML =
         `<span id="atual">${likesAtual.toLocaleString('pt-BR')}</span> / <span id="meta">${parseInt(max).toLocaleString('pt-BR')}</span>`;
     } else if (formatoContador === 'apenas-atual') {
@@ -1415,20 +1721,6 @@
     await buscarLiveId();
     if (liveVideoId) await atualizarLikes();
   }, 600000);
-
-  // ========== CSS ANIMAÇÕES EXTRAS (rainbow, pulse barra) ==========
-  const extraCSS = document.createElement('style');
-  extraCSS.textContent = `
-    @keyframes barraPulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
-    }
-    @keyframes rainbowMove {
-      0% { background-position: 0% 50%; }
-      100% { background-position: 200% 50%; }
-    }
-  `;
-  document.head.appendChild(extraCSS);
 
   init();
   updateUI(0, META_LIKES);
