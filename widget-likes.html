@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: transparent; }
+
+  .widget-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 480px;
+    height: 110px;
+    background-color: #000;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .barra-progresso {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0%;
+    background-color: #ff0000;
+    transition: width 1.5s ease-in-out;
+    z-index: 1;
+  }
+
+  .icone-like-svg {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    width: 60px;
+    z-index: 2;
+    filter: brightness(0) invert(1);
+    animation: wiggleFloat 3s ease-in-out infinite;
+    transform-origin: center;
+  }
+
+  .area-textos {
+    position: absolute;
+    left: 100px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    color: white;
+    font-family: 'Arial Black', sans-serif;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .texto-chamada { font-size: 20px; line-height: 1; }
+  .verde { color: #00ff00; }
+  .contador-likes { font-size: 40px; font-weight: bold; margin-top: 5px; line-height: 1; }
+
+  @keyframes wiggleFloat {
+    0%, 100% { transform: translateY(-50%) rotate(0deg); }
+    25%       { transform: translateY(-60%) rotate(-8deg); }
+    75%       { transform: translateY(-40%) rotate(8deg); }
+  }
+</style>
+</head>
+<body>
+<div class="widget-container">
+  <div id="progresso" class="barra-progresso"></div>
+  <img src="https://www.svgrepo.com/show/415785/thumbsup-ui-like.svg" class="icone-like-svg">
+  <div class="area-textos">
+    <div class="texto-chamada">DEIXA O <span class="verde">LIKE!</span></div>
+    <div class="contador-likes">
+      <span id="atual">...</span> / <span id="meta">0</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ========== CONFIGURAÇÕES ==========
+  const API_KEY    = "AIzaSyCRU3nsWj1uZcfLQfOxFOzX8IRxr_C1--s";
+  const CHANNEL_ID = "UCjrBK9DwokyeeIIECJvaFyQ";
+  const META_LIKES = 2000;
+  // ====================================
+
+  let liveVideoId = null;
+
+  async function buscarLiveId() {
+    try {
+      const r = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${CHANNEL_ID}&eventType=live&type=video&maxResults=1&key=${API_KEY}`);
+      const data = await r.json();
+
+      if (data.error) {
+        document.getElementById('atual').innerText = "ERRO " + data.error.code;
+        console.error("Erro API:", data.error);
+        liveVideoId = null;
+        return;
+      }
+
+      if (!data.items || data.items.length === 0) {
+        document.getElementById('atual').innerText = "OFFLINE";
+        liveVideoId = null;
+        return;
+      }
+
+      liveVideoId = data.items[0].id.videoId;
+      console.log("Live encontrada! ID:", liveVideoId);
+
+    } catch (e) {
+      document.getElementById('atual').innerText = "OFFLINE";
+      console.error("Erro buscarLiveId:", e);
+      liveVideoId = null;
+    }
+  }
+
+  async function atualizarLikes() {
+    if (!liveVideoId) return;
+    try {
+      const r = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=statistics,snippet&id=${liveVideoId}&key=${API_KEY}`);
+      const data = await r.json();
+
+      if (!data.items || data.items.length === 0) {
+        document.getElementById('atual').innerText = "OFFLINE";
+        liveVideoId = null;
+        return;
+      }
+
+      const video = data.items[0];
+
+      if (video.snippet.liveBroadcastContent !== "live") {
+        document.getElementById('atual').innerText = "OFFLINE";
+        liveVideoId = null;
+        return;
+      }
+
+      const cur = video.statistics.likeCount;
+      document.getElementById('atual').innerText = parseInt(cur).toLocaleString('pt-BR');
+      document.getElementById('meta').innerText = parseInt(META_LIKES).toLocaleString('pt-BR');
+      let p = Math.min((cur / META_LIKES) * 100, 100);
+      document.getElementById('progresso').style.width = p + "%";
+      console.log("Likes:", cur);
+
+    } catch (e) {
+      document.getElementById('atual').innerText = "OFFLINE";
+      console.error("Erro atualizarLikes:", e);
+    }
+  }
+
+  async function init() {
+    await buscarLiveId();
+    if (liveVideoId) await atualizarLikes();
+  }
+
+  // Atualiza likes a cada 1 minuto (1 unidade de cota)
+  setInterval(async () => {
+    if (liveVideoId) {
+      await atualizarLikes();
+    } else {
+      await buscarLiveId();
+      if (liveVideoId) await atualizarLikes();
+    }
+  }, 60000);
+
+  // Re-busca a live a cada 10 minutos (caso tenha caído e voltado)
+  setInterval(async () => {
+    liveVideoId = null;
+    await buscarLiveId();
+    if (liveVideoId) await atualizarLikes();
+  }, 600000);
+
+  // Inicia
+  init();
+</script>
+</body>
+</html>
