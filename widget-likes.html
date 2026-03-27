@@ -2,24 +2,13 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Inter:wght@700&family=JetBrains+Mono:wght@700&family=Oswald:wght@700&family=Rajdhani:wght@600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Share+Tech+Mono&family=Orbitron:wght@700;900&family=Press+Start+2P&family=Bebas+Neue&family=Righteous&family=Russo+One&family=Audiowide&family=Black+Ops+One&family=Exo+2:wght@700;900&family=Teko:wght@600;700&family=Chakra+Petch:wght@600;700&family=VT323&family=Bungee&family=Permanent+Marker&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  :root {
-    --fonte-principal: 'Rajdhani', sans-serif;
-    --fonte-numeros: 'Share Tech Mono', monospace;
-    --cor-chamada: #ffffff;
-    --cor-like: #00ff00;
-    --cor-numeros: #ffffff;
-    --tamanho-texto: 20px;
-    --tamanho-numeros: 40px;
-  }
-
   body {
     background: transparent;
-    font-family: var(--fonte-principal);
-    overflow: hidden;
+    font-family: 'Rajdhani', sans-serif;
   }
 
   /* ========== WIDGET ========== */
@@ -33,7 +22,6 @@
     background-color: #000;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 0 20px rgba(0,0,0,0.5);
   }
 
   .barra-progresso {
@@ -53,8 +41,7 @@
     width: 60px;
     z-index: 2;
     filter: brightness(0) invert(1);
-    animation: wiggleFloat 3s ease-in-out infinite;
-    transform-origin: center;
+    transform-origin: center bottom;
   }
 
   .area-textos {
@@ -69,136 +56,1382 @@
   }
 
   .texto-chamada {
-    font-size: var(--tamanho-texto);
+    font-size: 20px;
     line-height: 1;
-    font-family: var(--fonte-principal);
     font-weight: 700;
-    color: var(--cor-chamada);
+    letter-spacing: 1px;
+    color: var(--cor-chamada, #ffffff);
   }
 
-  .verde { color: var(--cor-like); }
+  .verde { color: var(--cor-like, #00ff00); }
 
   .contador-likes {
-    font-size: var(--tamanho-numeros);
+    font-size: 40px;
     font-weight: 700;
     margin-top: 5px;
     line-height: 1;
-    font-family: var(--fonte-numeros);
-    color: var(--cor-numeros);
+    color: var(--cor-numeros, #ffffff);
   }
 
+  /* ===== ANIMAÇÕES DO ÍCONE ===== */
   @keyframes wiggleFloat {
     0%, 100% { transform: translateY(-50%) rotate(0deg); }
     25%       { transform: translateY(-60%) rotate(-8deg); }
     75%       { transform: translateY(-40%) rotate(8deg); }
   }
+  @keyframes pulse {
+    0%, 100% { transform: translateY(-50%) scale(1); }
+    50%       { transform: translateY(-50%) scale(1.2); }
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(-50%); }
+    30%       { transform: translateY(-70%); }
+    60%       { transform: translateY(-42%); }
+    80%       { transform: translateY(-62%); }
+  }
+  @keyframes spin {
+    0%   { transform: translateY(-50%) rotate(0deg); }
+    100% { transform: translateY(-50%) rotate(360deg); }
+  }
+  @keyframes shake {
+    0%, 100% { transform: translateY(-50%) translateX(0); }
+    20%       { transform: translateY(-50%) translateX(-5px); }
+    40%       { transform: translateY(-50%) translateX(5px); }
+    60%       { transform: translateY(-50%) translateX(-3px); }
+    80%       { transform: translateY(-50%) translateX(3px); }
+  }
+  @keyframes rubberBand {
+    0%        { transform: translateY(-50%) scaleX(1) scaleY(1); }
+    30%       { transform: translateY(-50%) scaleX(1.25) scaleY(0.75); }
+    40%       { transform: translateY(-50%) scaleX(0.75) scaleY(1.25); }
+    60%       { transform: translateY(-50%) scaleX(1.15) scaleY(0.85); }
+    80%       { transform: translateY(-50%) scaleX(0.95) scaleY(1.05); }
+    100%      { transform: translateY(-50%) scaleX(1) scaleY(1); }
+  }
+  @keyframes tada {
+    0%        { transform: translateY(-50%) scale(1) rotate(0deg); }
+    10%, 20%  { transform: translateY(-50%) scale(0.9) rotate(-8deg); }
+    30%, 50%, 70%, 90% { transform: translateY(-50%) scale(1.2) rotate(8deg); }
+    40%, 60%, 80%      { transform: translateY(-50%) scale(1.2) rotate(-8deg); }
+    100%      { transform: translateY(-50%) scale(1) rotate(0deg); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(-50%); }
+    50%       { transform: translateY(-65%); }
+  }
+  @keyframes flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+    20%, 24%, 55% { opacity: 0.3; }
+  }
+  @keyframes heartbeat {
+    0%   { transform: translateY(-50%) scale(1); }
+    14%  { transform: translateY(-50%) scale(1.25); }
+    28%  { transform: translateY(-50%) scale(1); }
+    42%  { transform: translateY(-50%) scale(1.25); }
+    70%  { transform: translateY(-50%) scale(1); }
+  }
 
-  /* ========== PAINEL DE CONTROLE ========== */
+  .anim-wiggle    { animation: wiggleFloat 3s ease-in-out infinite; }
+  .anim-pulse     { animation: pulse 1.2s ease-in-out infinite; }
+  .anim-bounce    { animation: bounce 1.5s cubic-bezier(.36,.07,.19,.97) infinite; }
+  .anim-spin      { animation: spin 4s linear infinite; }
+  .anim-shake     { animation: shake 0.8s ease-in-out infinite; }
+  .anim-rubber    { animation: rubberBand 1.5s ease-in-out infinite; }
+  .anim-tada      { animation: tada 2s ease-in-out infinite; }
+  .anim-float     { animation: float 2.5s ease-in-out infinite; }
+  .anim-flicker   { animation: flicker 2s linear infinite; }
+  .anim-heartbeat { animation: heartbeat 1.3s ease-in-out infinite; }
+  .anim-none      { animation: none; }
+
+  /* ========== PAINEL ========== */
   #painel {
     position: fixed;
     bottom: 10px;
     left: 50%;
     transform: translateX(-50%);
     width: 700px;
-    background: #0f0f0f;
-    border: 1px solid #2a2a2a;
-    border-radius: 12px;
-    padding: 15px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.8);
-    z-index: 999;
+    background: #0a0a0a;
+    border: 1px solid #222;
+    border-radius: 14px;
+    padding: 0;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.8);
+    overflow: hidden;
   }
 
-  #painel h3 { grid-column: 1 / -1; font-size: 10px; color: #555; letter-spacing: 2px; text-transform: uppercase; border-bottom: 1px solid #222; padding-bottom: 5px; }
+  .painel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background: #111;
+    border-bottom: 1px solid #1e1e1e;
+  }
 
-  .secao { display: flex; flex-direction: column; gap: 8px; }
-  .painel-row { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #888; }
-  
-  select, input[type="number"], .btn {
-    background: #1a1a1a;
-    border: 1px solid #333;
-    color: #fff;
-    padding: 5px;
-    border-radius: 4px;
+  .painel-header h3 {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: #555;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  /* Abas */
+  .tabs {
+    display: flex;
+    gap: 2px;
+    background: #0a0a0a;
+    padding: 8px 16px 0;
+    border-bottom: 1px solid #1a1a1a;
+  }
+
+  .tab-btn {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    background: transparent;
+    border: 1px solid #222;
+    border-bottom: none;
+    border-radius: 6px 6px 0 0;
+    color: #444;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    top: 1px;
+  }
+  .tab-btn:hover { color: #888; border-color: #333; }
+  .tab-btn.ativo {
+    background: #141414;
+    color: #ff3333;
+    border-color: #333;
+  }
+
+  .tab-content {
+    display: none;
+    padding: 14px 20px;
+    flex-direction: column;
+    gap: 12px;
+    background: #0f0f0f;
+  }
+  .tab-content.ativo { display: flex; }
+
+  /* Rows */
+  .painel-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .painel-label {
+    font-size: 11px;
+    color: #555;
+    font-family: 'Share Tech Mono', monospace;
+    min-width: 130px;
+    letter-spacing: 1px;
+  }
+
+  /* Status */
+  #status-badge {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+  }
+  .status-online  { background: #0a2a0a; color: #00ff44; border: 1px solid #00ff44; }
+  .status-offline { background: #2a1a00; color: #ff8800; border: 1px solid #ff8800; }
+  .status-erro    { background: #2a0000; color: #ff3333; border: 1px solid #ff3333; }
+  .status-aguard  { background: #1a1a2a; color: #6666ff; border: 1px solid #6666ff; }
+
+  #video-id-display {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: #444;
+  }
+
+  /* Slider */
+  .slider-custom {
+    -webkit-appearance: none;
+    height: 4px;
+    background: #222;
+    border-radius: 2px;
     outline: none;
   }
+  .slider-custom::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 13px; height: 13px;
+    border-radius: 50%;
+    background: #ff3333;
+    cursor: pointer;
+  }
+  #sim-range { width: 160px; }
+  #font-size-range, #num-size-range { width: 120px; }
 
-  .btn { cursor: pointer; font-weight: bold; text-transform: uppercase; font-size: 10px; }
-  .btn:hover { background: #333; }
-  .btn-green { color: #00ff44; border-color: #00ff44; }
+  .valor-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: #ff3333;
+    min-width: 40px;
+  }
 
-  input[type="color"] { width: 30px; height: 30px; border: none; cursor: pointer; background: none; }
+  /* Botões */
+  .btn {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 5px 13px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: uppercase;
+  }
+  .btn-red    { background: #ff3333; color: #fff; }
+  .btn-red:hover { background: #ff5555; }
+  .btn-dark   { background: #1a1a1a; color: #777; border: 1px solid #2a2a2a; }
+  .btn-dark:hover { background: #222; color: #aaa; }
+  .btn-green  { background: #0d2a0d; color: #00ff44; border: 1px solid #00ff44; }
+  .btn-green:hover { background: #122a12; }
+  .btn-blue   { background: #0d0d2a; color: #6666ff; border: 1px solid #6666ff; }
+  .btn-blue:hover { background: #12122a; }
+
+  /* Input texto */
+  .input-text {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px;
+    background: #111;
+    border: 1px solid #2a2a2a;
+    border-radius: 6px;
+    color: #fff;
+    padding: 4px 10px;
+    outline: none;
+  }
+  .input-text:focus { border-color: #444; }
+
+  /* Color picker */
+  input[type="color"] {
+    -webkit-appearance: none;
+    width: 28px; height: 28px;
+    border: 1px solid #2a2a2a;
+    border-radius: 6px;
+    padding: 2px;
+    background: #111;
+    cursor: pointer;
+  }
+  input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
+  input[type="color"]::-webkit-color-swatch { border: none; border-radius: 4px; }
+
+  .cor-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .cor-group label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: #444;
+    letter-spacing: 1px;
+  }
+
+  .divisor { width: 100%; height: 1px; background: #181818; }
+
+  /* ===== SELETOR DE FONTES ===== */
+  .font-picker-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+
+  .font-picker-btn {
+    font-size: 12px;
+    background: #111;
+    border: 1px solid #2a2a2a;
+    border-radius: 6px;
+    color: #ccc;
+    padding: 5px 12px;
+    cursor: pointer;
+    min-width: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    transition: border-color 0.2s;
+  }
+  .font-picker-btn:hover { border-color: #444; }
+  .font-picker-btn .arrow { font-size: 9px; color: #555; }
+
+  .font-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    z-index: 9999;
+    background: #111;
+    border: 1px solid #2a2a2a;
+    border-radius: 8px;
+    padding: 6px;
+    width: 260px;
+    max-height: 320px;
+    overflow-y: auto;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.7);
+    scrollbar-width: thin;
+    scrollbar-color: #333 transparent;
+  }
+  .font-dropdown.aberto { display: block; }
+
+  .font-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .font-option:hover { background: #1a1a1a; }
+  .font-option.selecionada { background: #1a0000; border: 1px solid #ff3333; }
+
+  .font-name {
+    font-size: 11px;
+    color: #777;
+    font-family: 'Share Tech Mono', monospace;
+    letter-spacing: 1px;
+  }
+  .font-preview {
+    font-size: 15px;
+    color: #fff;
+    letter-spacing: 1px;
+  }
+
+  /* ===== SELETOR DE ANIMAÇÕES ===== */
+  .anim-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+    width: 100%;
+  }
+
+  .anim-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 4px;
+    background: #111;
+    border: 1px solid #2a2a2a;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    gap: 4px;
+  }
+  .anim-card:hover { border-color: #444; background: #161616; }
+  .anim-card.selecionada { border-color: #ff3333; background: #1a0000; }
+
+  .anim-card img {
+    width: 28px;
+    filter: brightness(0) invert(0.6);
+    pointer-events: none;
+  }
+  .anim-card.selecionada img { filter: brightness(0) invert(1); }
+
+  .anim-card span {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    color: #555;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .anim-card.selecionada span { color: #ff3333; }
+
+  /* ===== SELETOR ICONE ===== */
+  .icon-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 6px;
+    width: 100%;
+  }
+
+  .icon-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    background: #111;
+    border: 1px solid #2a2a2a;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .icon-card:hover { border-color: #444; background: #161616; }
+  .icon-card.selecionada { border-color: #ff3333; background: #1a0000; }
+  .icon-card img {
+    width: 28px;
+    filter: brightness(0) invert(0.5);
+    pointer-events: none;
+  }
+  .icon-card.selecionada img { filter: brightness(0) invert(1); }
+
+  /* ===== TAMANHO WIDGET ===== */
+  .size-slider {
+    width: 150px;
+  }
+
+  /* ===== POSIÇÃO WIDGET ===== */
+  .pos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 36px);
+    grid-template-rows: repeat(3, 36px);
+    gap: 4px;
+  }
+  .pos-btn {
+    background: #111;
+    border: 1px solid #2a2a2a;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+    color: #555;
+  }
+  .pos-btn:hover { background: #1a1a1a; border-color: #444; color: #888; }
+  .pos-btn.ativo { background: #1a0000; border-color: #ff3333; color: #ff3333; }
+  .pos-btn.center-btn { font-size: 10px; color: #333; }
+
+  /* Sombra texto */
+  .shadow-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+  /* Toggle switch */
+  .toggle-wrap { display: flex; align-items: center; gap: 8px; }
+  .toggle {
+    position: relative;
+    width: 38px;
+    height: 20px;
+    cursor: pointer;
+  }
+  .toggle input { display: none; }
+  .toggle-track {
+    position: absolute;
+    inset: 0;
+    background: #222;
+    border-radius: 20px;
+    border: 1px solid #333;
+    transition: background 0.2s;
+  }
+  .toggle input:checked + .toggle-track { background: #3a0000; border-color: #ff3333; }
+  .toggle-thumb {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 12px;
+    height: 12px;
+    background: #444;
+    border-radius: 50%;
+    transition: all 0.2s;
+  }
+  .toggle input:checked ~ .toggle-thumb {
+    left: 21px;
+    background: #ff3333;
+  }
+  .toggle-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: #555;
+    letter-spacing: 1px;
+  }
+
+  /* Texto personalizado */
+  #texto-chamada-input {
+    width: 220px;
+  }
+  #texto-like-input {
+    width: 120px;
+  }
+
+  /* barra-style */
+  .style-grid {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .style-card {
+    padding: 5px 12px;
+    background: #111;
+    border: 1px solid #2a2a2a;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: #555;
+    letter-spacing: 1px;
+    transition: all 0.2s;
+    text-transform: uppercase;
+  }
+  .style-card:hover { border-color: #444; color: #888; }
+  .style-card.selecionada { border-color: #ff3333; color: #ff3333; background: #1a0000; }
+
+  .scrollbar-style::-webkit-scrollbar { width: 4px; }
+  .scrollbar-style::-webkit-scrollbar-track { background: transparent; }
+  .scrollbar-style::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
+
+  /* Prévia de cor de fundo */
+  #bg-color-preview {
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    border: 1px solid #333;
+  }
 </style>
 </head>
 <body>
 
-<div class="widget-container">
+<!-- ===================== WIDGET ===================== -->
+<div class="widget-container" id="widget">
   <div id="progresso" class="barra-progresso"></div>
-  <img src="https://www.svgrepo.com/show/415785/thumbsup-ui-like.svg" class="icone-like-svg">
+  <img src="https://www.svgrepo.com/show/415785/thumbsup-ui-like.svg" class="icone-like-svg anim-wiggle" id="icone-like">
   <div class="area-textos">
-    <div class="texto-chamada">DEIXA O <span class="verde" id="span-like">LIKE!</span></div>
-    <div class="contador-likes">
+    <div class="texto-chamada" id="texto-chamada-widget">DEIXA O <span class="verde" id="texto-like-widget">LIKE!</span></div>
+    <div class="contador-likes" id="contador">
       <span id="atual">...</span> / <span id="meta">0</span>
     </div>
   </div>
 </div>
 
+<!-- ===================== PAINEL ===================== -->
 <div id="painel">
-  <h3>⚙ Customização Profissional</h3>
 
-  <div class="secao">
+  <div class="painel-header">
+    <h3>⚙ Widget Likes — Painel de Controle</h3>
+    <span id="status-badge" class="status-aguard">AGUARDANDO</span>
+  </div>
+
+  <!-- ABAS -->
+  <div class="tabs">
+    <button class="tab-btn ativo" onclick="mudarAba('status')">📡 STATUS</button>
+    <button class="tab-btn" onclick="mudarAba('tipografia')">🔤 FONTES</button>
+    <button class="tab-btn" onclick="mudarAba('animacao')">✨ ANIMAÇÃO</button>
+    <button class="tab-btn" onclick="mudarAba('cores')">🎨 CORES</button>
+    <button class="tab-btn" onclick="mudarAba('layout')">📐 LAYOUT</button>
+    <button class="tab-btn" onclick="mudarAba('textos')">✏️ TEXTOS</button>
+  </div>
+
+  <!-- ========== ABA: STATUS ========== -->
+  <div class="tab-content ativo scrollbar-style" id="tab-status" style="overflow-y:auto;max-height:220px;">
     <div class="painel-row">
-      <span>STATUS:</span>
-      <strong id="status-badge" style="color: #66f;">AGUARDANDO</strong>
+      <span class="painel-label">VIDEO ID</span>
+      <span id="video-id-display" style="font-family:'Share Tech Mono',monospace;font-size:11px;color:#444;">—</span>
     </div>
+    <div class="divisor"></div>
     <div class="painel-row">
-      <span>META:</span>
-      <input type="number" id="meta-input" value="2000" style="width: 70px;">
-      <button class="btn" onclick="aplicarMeta()">Definir</button>
+      <span class="painel-label">SIMULAR LIKES</span>
+      <input type="range" id="sim-range" class="slider-custom" min="0" max="10000" value="500">
+      <span id="sim-valor" class="valor-label">500</span>
+      <button class="btn btn-red" onclick="simularLikes()">SIMULAR</button>
+      <button class="btn btn-dark" onclick="voltarReal()">REAL</button>
+      <button class="btn btn-green" onclick="forcarAtualizacao()">↺ ATUALIZAR</button>
     </div>
+    <div class="divisor"></div>
     <div class="painel-row">
-      <span>SIMULAR:</span>
-      <input type="range" id="sim-range" min="0" max="5000" value="500">
-      <button class="btn" onclick="simularLikes()">Testar</button>
-      <button class="btn" onclick="voltarReal()">Real</button>
+      <span class="painel-label">META DE LIKES</span>
+      <input type="number" id="meta-input" class="input-text" value="2000" min="1" style="width:90px;">
+      <button class="btn btn-blue" onclick="aplicarMeta()">APLICAR</button>
     </div>
   </div>
 
-  <div class="secao">
+  <!-- ========== ABA: TIPOGRAFIA ========== -->
+  <div class="tab-content scrollbar-style" id="tab-tipografia" style="overflow-y:auto;max-height:220px;">
+
     <div class="painel-row">
-      <span>FONTE:</span>
-      <select id="select-fonte" onchange="mudarFonte()">
-        <option value="'Rajdhani'">Futurista (Rajdhani)</option>
-        <option value="'Bungee'">Gamer (Bungee)</option>
-        <option value="'Share Tech Mono'">Retro (Share Tech)</option>
-        <option value="'Oswald'">Impacto (Oswald)</option>
-        <option value="'JetBrains Mono'">Programador (JetBrains)</option>
-        <option value="'Inter'">Limpa (Inter)</option>
-      </select>
+      <span class="painel-label">FONTE DO TEXTO</span>
+      <div class="font-picker-wrapper" id="picker-texto">
+        <div class="font-picker-btn" id="btn-fonte-texto" onclick="toggleFontPicker('texto')">
+          <span id="label-fonte-texto" style="font-family:'Rajdhani',sans-serif;">Rajdhani</span>
+          <span class="arrow">▼</span>
+        </div>
+        <div class="font-dropdown" id="dropdown-texto"></div>
+      </div>
+      <span class="painel-label" style="min-width:60px;margin-left:12px;">TAMANHO</span>
+      <input type="range" id="font-size-range" class="slider-custom" min="12" max="36" value="20">
+      <span id="font-size-valor" class="valor-label">20px</span>
     </div>
+
+    <div class="divisor"></div>
+
     <div class="painel-row">
-      <span>CORES:</span>
-      <input type="color" id="cp-texto" value="#ffffff" oninput="aplicarCores()">
-      <input type="color" id="cp-like" value="#00ff00" oninput="aplicarCores()">
-      <input type="color" id="cp-barra" value="#ff0000" oninput="aplicarCores()">
+      <span class="painel-label">FONTE DOS NÚMEROS</span>
+      <div class="font-picker-wrapper" id="picker-numeros">
+        <div class="font-picker-btn" id="btn-fonte-numeros" onclick="toggleFontPicker('numeros')">
+          <span id="label-fonte-numeros" style="font-family:'Share Tech Mono',monospace;">Share Tech Mono</span>
+          <span class="arrow">▼</span>
+        </div>
+        <div class="font-dropdown" id="dropdown-numeros"></div>
+      </div>
+      <span class="painel-label" style="min-width:60px;margin-left:12px;">TAMANHO</span>
+      <input type="range" id="num-size-range" class="slider-custom" min="20" max="72" value="40">
+      <span id="num-size-valor" class="valor-label">40px</span>
     </div>
+
+    <div class="divisor"></div>
+
     <div class="painel-row">
-        <button class="btn btn-green" onclick="forcarAtualizacao()">↺ RECARREGAR LIVE</button>
+      <span class="painel-label">SOMBRA TEXTO</span>
+      <div class="toggle-wrap">
+        <label class="toggle">
+          <input type="checkbox" id="toggle-shadow" onchange="aplicarSombra()">
+          <div class="toggle-track"></div>
+          <div class="toggle-thumb"></div>
+        </label>
+        <span class="toggle-label">ATIVAR</span>
+      </div>
+      <input type="color" id="cor-shadow" value="#000000" oninput="aplicarSombra()" style="margin-left:8px;">
+      <span class="painel-label" style="min-width:40px;">BLUR</span>
+      <input type="range" class="slider-custom" id="shadow-blur" min="0" max="20" value="4" style="width:80px;" oninput="aplicarSombra()">
     </div>
+
+    <div class="divisor"></div>
+
+    <div class="painel-row">
+      <span class="painel-label">ESPAÇ. LETRAS</span>
+      <input type="range" class="slider-custom" id="letter-spacing-range" min="-2" max="10" value="1" style="width:120px;" oninput="aplicarLetterSpacing()">
+      <span id="letter-spacing-valor" class="valor-label">1px</span>
+    </div>
+
   </div>
+
+  <!-- ========== ABA: ANIMAÇÃO ========== -->
+  <div class="tab-content scrollbar-style" id="tab-animacao" style="overflow-y:auto;max-height:220px;">
+
+    <div class="painel-row">
+      <span class="painel-label">ÍCONE</span>
+      <div class="icon-grid" style="flex:1;">
+        <div class="icon-card selecionada" onclick="selecionarIcone(this,'https://www.svgrepo.com/show/415785/thumbsup-ui-like.svg')">
+          <img src="https://www.svgrepo.com/show/415785/thumbsup-ui-like.svg">
+        </div>
+        <div class="icon-card" onclick="selecionarIcone(this,'https://www.svgrepo.com/show/532048/heart.svg')">
+          <img src="https://www.svgrepo.com/show/532048/heart.svg">
+        </div>
+        <div class="icon-card" onclick="selecionarIcone(this,'https://www.svgrepo.com/show/533004/star.svg')">
+          <img src="https://www.svgrepo.com/show/533004/star.svg">
+        </div>
+        <div class="icon-card" onclick="selecionarIcone(this,'https://www.svgrepo.com/show/532097/fire.svg')">
+          <img src="https://www.svgrepo.com/show/532097/fire.svg">
+        </div>
+        <div class="icon-card" onclick="selecionarIcone(this,'https://www.svgrepo.com/show/533210/trophy.svg')">
+          <img src="https://www.svgrepo.com/show/533210/trophy.svg">
+        </div>
+        <div class="icon-card" onclick="selecionarIcone(this,'https://www.svgrepo.com/show/532090/bell.svg')">
+          <img src="https://www.svgrepo.com/show/532090/bell.svg">
+        </div>
+      </div>
+    </div>
+
+    <div class="divisor"></div>
+
+    <div class="painel-row">
+      <span class="painel-label">TAMANHO ÍCONE</span>
+      <input type="range" class="slider-custom size-slider" id="icon-size-range" min="30" max="100" value="60" oninput="aplicarTamanhoIcone()">
+      <span id="icon-size-valor" class="valor-label">60px</span>
+    </div>
+
+    <div class="divisor"></div>
+
+    <div class="painel-row" style="align-items:flex-start;">
+      <span class="painel-label" style="padding-top:6px;">ANIMAÇÃO</span>
+      <div class="anim-grid" style="flex:1;">
+        <div class="anim-card selecionada" onclick="selecionarAnim(this,'anim-wiggle')">
+          <img src="https://www.svgrepo.com/show/415785/thumbsup-ui-like.svg">
+          <span>WIGGLE</span>
+        </div>
+        <div class="anim-card" onclick="selecionarAnim(this,'anim-pulse')">
+          <img src="https://www.svgrepo.com/show/415785/thumbsup-ui-like.svg">
+          <span>PULSE</span>
+        </div>
+        <div class="anim-card" onclick="selecionarAnim(this,'anim-bounce')">
+          <img src="https://www.svgrepo.com/show/415785/thumbsup-ui-like.svg">
+          <span>BOUNCE</span>
+        </div>
+        <div class="anim-card" onclick="selecionarAnim(this,'anim-spin')">
+          <img src="https://www.svgrepo.com/show/415785/thumbsup-ui-like.svg">
+          <span>SPIN</span>
+        </div>
+        <div class="anim-card" onclick="selecionarAnim(this,'anim-shake')">
+          <img src="https://www.svgrepo.com/show/415785/thumbsup-ui-like.svg">
+          <span>SHAKE</span>
+        </div>
+        <div class="anim-card" onclick="selecionarAnim(this,'anim-rubber')">
+          <img src="https://www.svgrepo.com/show/415785/thumbsup-ui-like.svg">
+          <span>RUBBER</span>
+        </div>
+        <div class="anim-card" onclick="selecionarAnim(this,'anim-tada')">
+          <img src="https://www.svgrepo.com/show/415785/thumbsup-ui-like.svg">
+          <span>TADA</span>
+        </div>
+        <div class="anim-card" onclick="selecionarAnim(this,'anim-float')">
+          <img src="https://www.svgrepo.com/show/415785/thumbsup-ui-like.svg">
+          <span>FLOAT</span>
+        </div>
+        <div class="anim-card" onclick="selecionarAnim(this,'anim-flicker')">
+          <img src="https://www.svgrepo.com/show/415785/thumbsup-ui-like.svg">
+          <span>FLICKER</span>
+        </div>
+        <div class="anim-card" onclick="selecionarAnim(this,'anim-heartbeat')">
+          <img src="https://www.svgrepo.com/show/415785/thumbsup-ui-like.svg">
+          <span>HEART</span>
+        </div>
+        <div class="anim-card" onclick="selecionarAnim(this,'anim-none')">
+          <img src="https://www.svgrepo.com/show/415785/thumbsup-ui-like.svg" style="opacity:.3;">
+          <span>NONE</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="divisor"></div>
+
+    <div class="painel-row">
+      <span class="painel-label">VELOCIDADE</span>
+      <input type="range" class="slider-custom" id="anim-speed-range" min="0.3" max="5" step="0.1" value="1" style="width:130px;" oninput="aplicarVelocidadeAnim()">
+      <span id="anim-speed-valor" class="valor-label">1x</span>
+    </div>
+
+  </div>
+
+  <!-- ========== ABA: CORES ========== -->
+  <div class="tab-content scrollbar-style" id="tab-cores" style="overflow-y:auto;max-height:220px;">
+
+    <div class="painel-row">
+      <span class="painel-label">CORES</span>
+      <div class="cor-group"><label>TEXTO</label><input type="color" id="cor-chamada" value="#ffffff" oninput="aplicarCores()"></div>
+      <div class="cor-group"><label>LIKE!</label><input type="color" id="cor-like" value="#00ff00" oninput="aplicarCores()"></div>
+      <div class="cor-group"><label>NÚMEROS</label><input type="color" id="cor-numeros" value="#ffffff" oninput="aplicarCores()"></div>
+      <div class="cor-group"><label>BARRA</label><input type="color" id="cor-barra" value="#ff0000" oninput="aplicarCores()"></div>
+    </div>
+
+    <div class="divisor"></div>
+
+    <div class="painel-row">
+      <span class="painel-label">FUNDO WIDGET</span>
+      <input type="color" id="cor-fundo" value="#000000" oninput="aplicarCorFundo()">
+      <span class="painel-label" style="min-width:80px;margin-left:8px;">OPACIDADE</span>
+      <input type="range" class="slider-custom" id="opacity-fundo" min="0" max="100" value="100" style="width:100px;" oninput="aplicarCorFundo()">
+      <span id="opacity-valor" class="valor-label">100%</span>
+    </div>
+
+    <div class="divisor"></div>
+
+    <div class="painel-row">
+      <span class="painel-label">COR ÍCONE</span>
+      <div class="toggle-wrap">
+        <label class="toggle">
+          <input type="checkbox" id="toggle-icon-color" onchange="aplicarCorIcone()">
+          <div class="toggle-track"></div>
+          <div class="toggle-thumb"></div>
+        </label>
+        <span class="toggle-label">COR CUSTOM</span>
+      </div>
+      <input type="color" id="cor-icone" value="#ffffff" oninput="aplicarCorIcone()">
+    </div>
+
+    <div class="divisor"></div>
+
+    <div class="painel-row">
+      <span class="painel-label">ESTILO BARRA</span>
+      <div class="style-grid">
+        <div class="style-card selecionada" onclick="selecionarEstiloBarra(this,'solid')">SÓLIDA</div>
+        <div class="style-card" onclick="selecionarEstiloBarra(this,'gradient')">GRADIENTE</div>
+        <div class="style-card" onclick="selecionarEstiloBarra(this,'pulse')">PULSANTE</div>
+        <div class="style-card" onclick="selecionarEstiloBarra(this,'rainbow')">RAINBOW</div>
+        <div class="style-card" onclick="selecionarEstiloBarra(this,'glow')">GLOW</div>
+      </div>
+    </div>
+
+    <div class="divisor"></div>
+
+    <div class="painel-row" id="row-gradient" style="display:none;">
+      <span class="painel-label">COR 2 GRADIENT</span>
+      <input type="color" id="cor-barra2" value="#ff9900" oninput="aplicarEstiloBarra()">
+    </div>
+
+  </div>
+
+  <!-- ========== ABA: LAYOUT ========== -->
+  <div class="tab-content scrollbar-style" id="tab-layout" style="overflow-y:auto;max-height:220px;">
+
+    <div class="painel-row">
+      <span class="painel-label">POSIÇÃO</span>
+      <div class="pos-grid" id="pos-grid">
+        <div class="pos-btn" onclick="setPosicao(this,'top-left')">↖</div>
+        <div class="pos-btn" onclick="setPosicao(this,'top-center')">↑</div>
+        <div class="pos-btn" onclick="setPosicao(this,'top-right')">↗</div>
+        <div class="pos-btn" onclick="setPosicao(this,'mid-left')">←</div>
+        <div class="pos-btn center-btn ativo" onclick="setPosicao(this,'center')">●</div>
+        <div class="pos-btn" onclick="setPosicao(this,'mid-right')">→</div>
+        <div class="pos-btn" onclick="setPosicao(this,'bot-left')">↙</div>
+        <div class="pos-btn" onclick="setPosicao(this,'bot-center')">↓</div>
+        <div class="pos-btn" onclick="setPosicao(this,'bot-right')">↘</div>
+      </div>
+    </div>
+
+    <div class="divisor"></div>
+
+    <div class="painel-row">
+      <span class="painel-label">LARGURA</span>
+      <input type="range" class="slider-custom" id="widget-width" min="300" max="700" value="480" style="width:130px;" oninput="aplicarTamanhoWidget()">
+      <span id="widget-width-val" class="valor-label">480px</span>
+      <span class="painel-label" style="min-width:60px;margin-left:8px;">ALTURA</span>
+      <input type="range" class="slider-custom" id="widget-height" min="60" max="200" value="110" style="width:100px;" oninput="aplicarTamanhoWidget()">
+      <span id="widget-height-val" class="valor-label">110px</span>
+    </div>
+
+    <div class="divisor"></div>
+
+    <div class="painel-row">
+      <span class="painel-label">BORDER RADIUS</span>
+      <input type="range" class="slider-custom" id="border-radius-range" min="0" max="55" value="8" style="width:120px;" oninput="aplicarBorderRadius()">
+      <span id="border-radius-valor" class="valor-label">8px</span>
+    </div>
+
+    <div class="divisor"></div>
+
+    <div class="painel-row">
+      <span class="painel-label">BARRA POSIÇÃO</span>
+      <div class="style-grid">
+        <div class="style-card selecionada" onclick="selecionarPosBarra(this,'bottom')">EMBAIXO</div>
+        <div class="style-card" onclick="selecionarPosBarra(this,'top')">CIMA</div>
+        <div class="style-card" onclick="selecionarPosBarra(this,'left')">LATERAL</div>
+        <div class="style-card" onclick="selecionarPosBarra(this,'full')">FUNDO</div>
+      </div>
+    </div>
+
+    <div class="divisor"></div>
+
+    <div class="painel-row">
+      <span class="painel-label">MOSTRAR BARRA</span>
+      <div class="toggle-wrap">
+        <label class="toggle">
+          <input type="checkbox" id="toggle-barra" checked onchange="aplicarVisibilidadeBarra()">
+          <div class="toggle-track"></div>
+          <div class="toggle-thumb"></div>
+        </label>
+        <span class="toggle-label">VISÍVEL</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ========== ABA: TEXTOS ========== -->
+  <div class="tab-content scrollbar-style" id="tab-textos" style="overflow-y:auto;max-height:220px;">
+
+    <div class="painel-row">
+      <span class="painel-label">TEXTO CHAMADA</span>
+      <input type="text" id="texto-chamada-input" class="input-text" value="DEIXA O" style="width:160px;" oninput="aplicarTextos()">
+    </div>
+
+    <div class="painel-row">
+      <span class="painel-label">TEXTO DESTAQUE</span>
+      <input type="text" id="texto-like-input" class="input-text" value="LIKE!" style="width:120px;" oninput="aplicarTextos()">
+    </div>
+
+    <div class="divisor"></div>
+
+    <div class="painel-row">
+      <span class="painel-label">FORMATO CONTADOR</span>
+      <div class="style-grid">
+        <div class="style-card selecionada" onclick="selecionarFormatoContador(this,'atual/meta')">ATUAL / META</div>
+        <div class="style-card" onclick="selecionarFormatoContador(this,'apenas-atual')">SÓ ATUAL</div>
+        <div class="style-card" onclick="selecionarFormatoContador(this,'porcentagem')">%</div>
+        <div class="style-card" onclick="selecionarFormatoContador(this,'faltam')">FALTAM</div>
+      </div>
+    </div>
+
+    <div class="divisor"></div>
+
+    <div class="painel-row">
+      <span class="painel-label">MAIÚSCULAS</span>
+      <div class="toggle-wrap">
+        <label class="toggle">
+          <input type="checkbox" id="toggle-uppercase" checked onchange="aplicarTextos()">
+          <div class="toggle-track"></div>
+          <div class="toggle-thumb"></div>
+        </label>
+        <span class="toggle-label">ATIVO</span>
+      </div>
+    </div>
+
+  </div>
+
 </div>
 
 <script>
-  const API_KEY = "SUA_KEY_AQUI"; // Lembre de colocar sua Key
+  // ========== CONFIG ==========
+  const API_KEY    = "AIzaSyCRU3nsWj1uZcfLQfOxFOzX8IRxr_C1--s";
   const CHANNEL_ID = "UCjrBK9DwokyeeIIECJvaFyQ";
-  let META_LIKES = 2000;
-  let liveVideoId = null;
+  let META_LIKES   = 2000;
+  let liveVideoId  = null;
   let modoSimulado = false;
+  let formatoContador = 'atual/meta';
+  let likesAtual = 0;
+  let posBarra = 'bottom';
+  let estiloBarra = 'solid';
 
-  // Esconde painel no OBS
-  if (navigator.userAgent.includes("OBS")) document.getElementById('painel').style.display = 'none';
+  // ========== FONTES DISPONÍVEIS ==========
+  const FONTES = [
+    { nome: 'Rajdhani',        family: "'Rajdhani', sans-serif" },
+    { nome: 'Orbitron',        family: "'Orbitron', sans-serif" },
+    { nome: 'Share Tech Mono', family: "'Share Tech Mono', monospace" },
+    { nome: 'Bebas Neue',      family: "'Bebas Neue', cursive" },
+    { nome: 'Press Start 2P',  family: "'Press Start 2P', cursive" },
+    { nome: 'Righteous',       family: "'Righteous', cursive" },
+    { nome: 'Russo One',       family: "'Russo One', sans-serif" },
+    { nome: 'Audiowide',       family: "'Audiowide', sans-serif" },
+    { nome: 'Black Ops One',   family: "'Black Ops One', cursive" },
+    { nome: 'Exo 2',           family: "'Exo 2', sans-serif" },
+    { nome: 'Teko',            family: "'Teko', sans-serif" },
+    { nome: 'Chakra Petch',    family: "'Chakra Petch', sans-serif" },
+    { nome: 'VT323',           family: "'VT323', monospace" },
+    { nome: 'Bungee',          family: "'Bungee', cursive" },
+    { nome: 'Permanent Marker',family: "'Permanent Marker', cursive" },
+  ];
 
+  // Detecta OBS
+  if (navigator.userAgent.includes("OBS")) {
+    document.getElementById('painel').style.display = 'none';
+  }
+
+  // ========== INICIALIZA DROPDOWNS DE FONTES ==========
+  function buildFontDropdowns() {
+    ['texto','numeros'].forEach(tipo => {
+      const dd = document.getElementById('dropdown-' + tipo);
+      dd.innerHTML = '';
+      FONTES.forEach(f => {
+        const div = document.createElement('div');
+        div.className = 'font-option';
+        div.dataset.family = f.family;
+        div.dataset.nome = f.nome;
+        div.innerHTML = `
+          <span class="font-name">${f.nome}</span>
+          <span class="font-preview" style="font-family:${f.family}">Aa 123</span>`;
+        div.onclick = () => selecionarFonte(tipo, f);
+        dd.appendChild(div);
+      });
+    });
+  }
+  buildFontDropdowns();
+
+  function toggleFontPicker(tipo) {
+    const dd = document.getElementById('dropdown-' + tipo);
+    const outro = tipo === 'texto' ? 'numeros' : 'texto';
+    document.getElementById('dropdown-' + outro).classList.remove('aberto');
+    dd.classList.toggle('aberto');
+  }
+
+  // Fechar dropdown ao clicar fora
+  document.addEventListener('click', e => {
+    if (!e.target.closest('.font-picker-wrapper')) {
+      document.querySelectorAll('.font-dropdown').forEach(d => d.classList.remove('aberto'));
+    }
+  });
+
+  function selecionarFonte(tipo, fonte) {
+    document.getElementById('dropdown-' + tipo).classList.remove('aberto');
+    const label = document.getElementById('label-fonte-' + tipo);
+    label.textContent = fonte.nome;
+    label.style.fontFamily = fonte.family;
+
+    // Marca selecionada
+    document.querySelectorAll(`#dropdown-${tipo} .font-option`).forEach(o => {
+      o.classList.toggle('selecionada', o.dataset.nome === fonte.nome);
+    });
+
+    if (tipo === 'texto') {
+      document.querySelector('.texto-chamada').style.fontFamily = fonte.family;
+    } else {
+      document.getElementById('contador').style.fontFamily = fonte.family;
+    }
+  }
+
+  // ========== ABAS ==========
+  function mudarAba(nome) {
+    document.querySelectorAll('.tab-btn').forEach((b,i) => {
+      const ids = ['status','tipografia','animacao','cores','layout','textos'];
+      b.classList.toggle('ativo', ids[i] === nome);
+    });
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('ativo'));
+    document.getElementById('tab-' + nome).classList.add('ativo');
+  }
+
+  // ========== SLIDER SIMULAÇÃO ==========
+  document.getElementById('sim-range').addEventListener('input', function() {
+    document.getElementById('sim-valor').innerText = parseInt(this.value).toLocaleString('pt-BR');
+  });
+
+  // ========== STATUS ==========
+  function setStatus(tipo, texto, videoId) {
+    const badge = document.getElementById('status-badge');
+    badge.className = 'status-' + tipo;
+    badge.innerText = texto;
+    document.getElementById('video-id-display').innerText = videoId ? '• ' + videoId : '—';
+  }
+
+  // ========== FONTES: TAMANHO ==========
+  document.getElementById('font-size-range').addEventListener('input', function() {
+    document.getElementById('font-size-valor').innerText = this.value + 'px';
+    document.querySelector('.texto-chamada').style.fontSize = this.value + 'px';
+  });
+  document.getElementById('num-size-range').addEventListener('input', function() {
+    document.getElementById('num-size-valor').innerText = this.value + 'px';
+    document.getElementById('contador').style.fontSize = this.value + 'px';
+  });
+
+  // ========== SOMBRA ==========
+  function aplicarSombra() {
+    const ativo = document.getElementById('toggle-shadow').checked;
+    const cor   = document.getElementById('cor-shadow').value;
+    const blur  = document.getElementById('shadow-blur').value;
+    const sombra = ativo ? `2px 2px ${blur}px ${cor}` : 'none';
+    document.querySelector('.texto-chamada').style.textShadow = sombra;
+    document.getElementById('contador').style.textShadow = sombra;
+  }
+
+  // ========== LETTER SPACING ==========
+  function aplicarLetterSpacing() {
+    const v = document.getElementById('letter-spacing-range').value;
+    document.getElementById('letter-spacing-valor').innerText = v + 'px';
+    document.querySelector('.texto-chamada').style.letterSpacing = v + 'px';
+    document.getElementById('contador').style.letterSpacing = v + 'px';
+  }
+
+  // ========== CORES ==========
   function aplicarCores() {
-    const root = document.documentElement
+    const r = document.documentElement.style;
+    r.setProperty('--cor-chamada', document.getElementById('cor-chamada').value);
+    r.setProperty('--cor-like',    document.getElementById('cor-like').value);
+    r.setProperty('--cor-numeros', document.getElementById('cor-numeros').value);
+    aplicarEstiloBarra();
+  }
+
+  function aplicarCorFundo() {
+    const cor = document.getElementById('cor-fundo').value;
+    const op  = document.getElementById('opacity-fundo').value;
+    document.getElementById('opacity-valor').innerText = op + '%';
+    const hex = parseInt(cor.slice(1), 16);
+    const r = (hex >> 16) & 255, g = (hex >> 8) & 255, b = hex & 255;
+    document.getElementById('widget').style.backgroundColor = `rgba(${r},${g},${b},${op/100})`;
+  }
+
+  function aplicarCorIcone() {
+    const custom = document.getElementById('toggle-icon-color').checked;
+    const cor    = document.getElementById('cor-icone').value;
+    const icone  = document.getElementById('icone-like');
+    if (custom) {
+      icone.style.filter = 'none';
+      icone.style.filter = `drop-shadow(0 0 0 ${cor}) brightness(0) saturate(100%) invert(1)`;
+      // Usa CSS filter trick para colorir SVG
+      icone.style.filter = svgColorFilter(cor);
+    } else {
+      icone.style.filter = 'brightness(0) invert(1)';
+    }
+  }
+
+  // Filter trick básico para colorir ícone
+  function svgColorFilter(hex) {
+    // simplificado: usa invert + sepia + saturate para aproximar a cor
+    const r = parseInt(hex.slice(1,3),16)/255;
+    const g = parseInt(hex.slice(3,5),16)/255;
+    const b = parseInt(hex.slice(5,7),16)/255;
+    if (r > 0.8 && g > 0.8 && b > 0.8) return 'brightness(0) invert(1)';
+    if (g > r && g > b) return 'brightness(0) invert(1) sepia(1) saturate(4) hue-rotate(80deg)';
+    if (r > g && r > b) return 'brightness(0) invert(1) sepia(1) saturate(5) hue-rotate(0deg)';
+    if (b > r && b > g) return 'brightness(0) invert(1) sepia(1) saturate(5) hue-rotate(190deg)';
+    return 'brightness(0) invert(1)';
+  }
+
+  // ========== ESTILO BARRA ==========
+  let barraAnimInterval = null;
+  function aplicarEstiloBarra() {
+    const barra = document.getElementById('progresso');
+    const cor1  = document.getElementById('cor-barra').value;
+    const cor2  = document.getElementById('cor-barra2') ? document.getElementById('cor-barra2').value : '#ff9900';
+
+    if (barraAnimInterval) clearInterval(barraAnimInterval);
+    barra.style.animation = 'none';
+
+    if (estiloBarra === 'solid') {
+      barra.style.background = cor1;
+      barra.style.boxShadow = 'none';
+    } else if (estiloBarra === 'gradient') {
+      barra.style.background = `linear-gradient(90deg, ${cor1}, ${cor2})`;
+      barra.style.boxShadow = 'none';
+    } else if (estiloBarra === 'pulse') {
+      barra.style.background = cor1;
+      barra.style.animation = 'barraPulse 1s ease-in-out infinite';
+    } else if (estiloBarra === 'rainbow') {
+      barra.style.background = 'linear-gradient(90deg, #ff0000, #ff9900, #ffff00, #00ff00, #0099ff, #9900ff)';
+      barra.style.backgroundSize = '200% 100%';
+      barra.style.animation = 'rainbowMove 2s linear infinite';
+    } else if (estiloBarra === 'glow') {
+      barra.style.background = cor1;
+      barra.style.boxShadow = `0 0 12px 4px ${cor1}`;
+    }
+  }
+
+  function selecionarEstiloBarra(el, tipo) {
+    document.querySelectorAll('#tab-cores .style-card').forEach(c => c.classList.remove('selecionada'));
+    el.classList.add('selecionada');
+    estiloBarra = tipo;
+    const rowGrad = document.getElementById('row-gradient');
+    rowGrad.style.display = tipo === 'gradient' ? 'flex' : 'none';
+    aplicarEstiloBarra();
+  }
+
+  // ========== POSIÇÃO DA BARRA ==========
+  function selecionarPosBarra(el, pos) {
+    document.querySelectorAll('#tab-layout .style-card').forEach(c => c.classList.remove('selecionada'));
+    el.classList.add('selecionada');
+    posBarra = pos;
+    const barra = document.getElementById('progresso');
+    barra.style.cssText = '';
+    if (pos === 'bottom') {
+      barra.style.cssText = 'position:absolute;bottom:0;left:0;height:6px;width:0%;transition:width 1.5s ease-in-out;z-index:1;';
+    } else if (pos === 'top') {
+      barra.style.cssText = 'position:absolute;top:0;left:0;height:6px;width:0%;transition:width 1.5s ease-in-out;z-index:1;';
+    } else if (pos === 'left') {
+      barra.style.cssText = 'position:absolute;top:0;left:0;width:6px;height:0%;transition:height 1.5s ease-in-out;z-index:1;';
+    } else if (pos === 'full') {
+      barra.style.cssText = 'position:absolute;top:0;left:0;height:100%;width:0%;transition:width 1.5s ease-in-out;z-index:1;opacity:0.35;';
+    }
+    aplicarEstiloBarra();
+    updateUI(likesAtual, META_LIKES);
+  }
+
+  function aplicarVisibilidadeBarra() {
+    document.getElementById('progresso').style.display =
+      document.getElementById('toggle-barra').checked ? 'block' : 'none';
+  }
+
+  // ========== ICONE ==========
+  function selecionarIcone(el, url) {
+    document.querySelectorAll('.icon-card').forEach(c => c.classList.remove('selecionada'));
+    el.classList.add('selecionada');
+    document.getElementById('icone-like').src = url;
+    el.querySelector('img').src = url;
+  }
+
+  function aplicarTamanhoIcone() {
+    const v = document.getElementById('icon-size-range').value;
+    document.getElementById('icon-size-valor').innerText = v + 'px';
+    document.getElementById('icone-like').style.width = v + 'px';
+  }
+
+  // ========== ANIMAÇÕES ==========
+  let animAtual = 'anim-wiggle';
+  let speedAtual = 1;
+
+  function selecionarAnim(el, classe) {
+    document.querySelectorAll('.anim-card').forEach(c => c.classList.remove('selecionada'));
+    el.classList.add('selecionada');
+    const icone = document.getElementById('icone-like');
+    icone.className = 'icone-like-svg ' + classe;
+    animAtual = classe;
+    aplicarVelocidadeAnim();
+  }
+
+  function aplicarVelocidadeAnim() {
+    const v = parseFloat(document.getElementById('anim-speed-range').value);
+    speedAtual = v;
+    document.getElementById('anim-speed-valor').innerText = v + 'x';
+    const icone = document.getElementById('icone-like');
+    icone.style.animationDuration = '';
+    const map = {
+      'anim-wiggle':3,'anim-pulse':1.2,'anim-bounce':1.5,'anim-spin':4,
+      'anim-shake':0.8,'anim-rubber':1.5,'anim-tada':2,'anim-float':2.5,
+      'anim-flicker':2,'anim-heartbeat':1.3
+    };
+    const base = map[animAtual] || 2;
+    icone.style.animationDuration = (base / v) + 's';
+  }
+
+  // ========== POSIÇÃO WIDGET ==========
+  function setPosicao(el, pos) {
+    document.querySelectorAll('.pos-btn').forEach(b => b.classList.remove('ativo'));
+    el.classList.add('ativo');
+    const w = document.getElementById('widget');
+    const map = {
+      'top-left':    { top:'20px', left:'20px', transform:'none' },
+      'top-center':  { top:'20px', left:'50%', transform:'translateX(-50%)' },
+      'top-right':   { top:'20px', right:'20px', left:'auto', transform:'none' },
+      'mid-left':    { top:'50%', left:'20px', transform:'translateY(-50%)' },
+      'center':      { top:'50%', left:'50%', transform:'translate(-50%,-50%)' },
+      'mid-right':   { top:'50%', right:'20px', left:'auto', transform:'translateY(-50%)' },
+      'bot-left':    { bottom:'20px', top:'auto', left:'20px', transform:'none' },
+      'bot-center':  { bottom:'20px', top:'auto', left:'50%', transform:'translateX(-50%)' },
+      'bot-right':   { bottom:'20px', top:'auto', right:'20px', left:'auto', transform:'none' },
+    };
+    const s = map[pos];
+    Object.assign(w.style, { top:'', left:'', right:'', bottom:'', transform:'' });
+    Object.assign(w.style, s);
+  }
+
+  // ========== TAMANHO WIDGET ==========
+  function aplicarTamanhoWidget() {
+    const w = document.getElementById('widget-width').value;
+    const h = document.getElementById('widget-height').value;
+    document.getElementById('widget-width-val').innerText = w + 'px';
+    document.getElementById('widget-height-val').innerText = h + 'px';
+    document.getElementById('widget').style.width  = w + 'px';
+    document.getElementById('widget').style.height = h + 'px';
+  }
+
+  // ========== BORDER RADIUS ==========
+  function aplicarBorderRadius() {
+    const v = document.getElementById('border-radius-range').value;
+    document.getElementById('border-radius-valor').innerText = v + 'px';
+    document.getElementById('widget').style.borderRadius = v + 'px';
+  }
+
+  // ========== TEXTOS ==========
+  function aplicarTextos() {
+    const chamada = document.getElementById('texto-chamada-input').value;
+    const like    = document.getElementById('texto-like-input').value;
+    const upper   = document.getElementById('toggle-uppercase').checked;
+    const tc = document.getElementById('texto-chamada-widget');
+    const tl = document.getElementById('texto-like-widget');
+    tc.childNodes[0].nodeValue = upper ? chamada.toUpperCase() + ' ' : chamada + ' ';
+    tl.textContent = upper ? like.toUpperCase() : like;
+    document.querySelector('.texto-chamada').style.textTransform = upper ? 'uppercase' : 'none';
+  }
+
+  function selecionarFormatoContador(el, fmt) {
+    document.querySelectorAll('#tab-textos .style-card').forEach(c => c.classList.remove('selecionada'));
+    el.classList.add('selecionada');
+    formatoContador = fmt;
+    updateUI(likesAtual, META_LIKES);
+  }
+
+  // ========== META ==========
+  function aplicarMeta() {
+    META_LIKES = parseInt(document.getElementById('meta-input').value) || 2000;
+    updateUI(likesAtual, META_LIKES);
+  }
+
+  // ========== SIMULAÇÃO ==========
+  function simularLikes() {
+    modoSimulado = true;
+    const val = parseInt(document.getElementById('sim-range').value);
+    likesAtual = val;
+    updateUI(val, META_LIKES);
+    setStatus('aguard', 'SIMULANDO', null);
+  }
+
+  function voltarReal() {
+    modoSimulado = false;
+    setStatus('aguard', 'AGUARDANDO', null);
+    init();
+  }
+
+  async function forcarAtualizacao() {
+    if (modoSimulado) return;
+    liveVideoId = null;
+    setStatus('aguard', 'BUSCANDO...', null);
+    await buscarLiveId();
+    if (liveVideoId) await atualizarLikes();
+  }
+
+  // ========== UPDATE UI ==========
+  function updateUI(cur, max) {
+    likesAtual = parseInt(cur) || 0;
+    const el = document.getElementById('atual');
+    const elMeta = document.getElementById('meta');
+    const pct = Math.min((likesAtual / max) * 100, 100);
+    const faltam = Math.max(max - likesAtual, 0);
+
+    if (formatoContador === 'atual/meta') {
+      el.innerText = likesAtual.toLocaleString('pt-BR');
+      elMeta.innerText = parseInt(max).toLocaleString('pt-BR');
+      document.getElementById('contador').innerHTML =
+        `<span id="atual">${likesAtual.toLocaleString('pt-BR')}</span> / <span id="meta">${parseInt(max).toLocaleString('pt-BR')}</span>`;
+    } else if (formatoContador === 'apenas-atual') {
+      document.getElementById('contador').innerHTML =
+        `<span id="atual">${likesAtual.toLocaleString('pt-BR')}</span><span id="meta" style="display:none">${max}</span>`;
+    } else if (formatoContador === 'porcentagem') {
+      document.getElementById('contador').innerHTML =
+        `<span id="atual">${pct.toFixed(1)}%</span><span id="meta" style="display:none">${max}</span>`;
+    } else if (formatoContador === 'faltam') {
+      document.getElementById('contador').innerHTML =
+        `<span id="atual">-${faltam.toLocaleString('pt-BR')}</span><span id="meta" style="display:none">${max}</span>`;
+    }
+
+    const barra = document.getElementById('progresso');
+    if (posBarra === 'left') {
+      barra.style.height = pct + '%';
+    } else {
+      barra.style.width = pct + '%';
+    }
+  }
+
+  // ========== API YOUTUBE ==========
+  async function buscarLiveId() {
+    try {
+      const r = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${CHANNEL_ID}&eventType=live&type=video&maxResults=1&key=${API_KEY}`);
+      const data = await r.json();
+      if (data.error) { setStatus('erro', 'ERRO ' + data.error.code, null); liveVideoId = null; return; }
+      if (!data.items || data.items.length === 0) { setStatus('offline','OFFLINE',null); liveVideoId = null; return; }
+      liveVideoId = data.items[0].id.videoId;
+      setStatus('aguard', 'LIVE ENCONTRADA', liveVideoId);
+    } catch (e) { setStatus('erro','ERRO REDE',null); liveVideoId = null; }
+  }
+
+  async function atualizarLikes() {
+    if (!liveVideoId || modoSimulado) return;
+    try {
+      const r = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=statistics,snippet&id=${liveVideoId}&key=${API_KEY}`);
+      const data = await r.json();
+      if (!data.items || data.items.length === 0) { setStatus('offline','OFFLINE',null); liveVideoId = null; return; }
+      const video = data.items[0];
+      if (video.snippet.liveBroadcastContent !== "live") { setStatus('offline','LIVE ENCERRADA',null); liveVideoId = null; return; }
+      updateUI(video.statistics.likeCount || 0, META_LIKES);
+      setStatus('online','ON LINE', liveVideoId);
+    } catch (e) { setStatus('erro','ERRO REDE',null); }
+  }
+
+  async function init() {
+    if (modoSimulado) return;
+    await buscarLiveId();
+    if (liveVideoId) await atualizarLikes();
+  }
+
+  setInterval(async () => {
+    if (modoSimulado) return;
+    if (liveVideoId) await atualizarLikes();
+    else { await buscarLiveId(); if (liveVideoId) await atualizarLikes(); }
+  }, 60000);
+
+  setInterval(async () => {
+    if (modoSimulado) return;
+    liveVideoId = null;
+    await buscarLiveId();
+    if (liveVideoId) await atualizarLikes();
+  }, 600000);
+
+  // ========== CSS ANIMAÇÕES EXTRAS (rainbow, pulse barra) ==========
+  const extraCSS = document.createElement('style');
+  extraCSS.textContent = `
+    @keyframes barraPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    @keyframes rainbowMove {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+  `;
+  document.head.appendChild(extraCSS);
+
+  init();
+  updateUI(0, META_LIKES);
+</script>
+</body>
+</html>
