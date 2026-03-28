@@ -11,6 +11,28 @@
     position: fixed; top: 50%; left: calc(50% + 275px); transform: translate(-50%, -50%);
     width: 480px; height: 110px; background-color: #000; border-radius: 8px; overflow: visible;
   }
+  .bg-pattern {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .bg-pattern::before {
+    content: "";
+    position: absolute;
+    top: -200%;
+    left: -200%;
+    width: 500%;
+    height: 500%;
+    background-image: var(--bg-pattern-bg, none);
+    background-size: var(--bg-pattern-size, auto);
+    background-position: center;
+    background-repeat: repeat;
+    transform: rotate(var(--bg-pattern-rot, 0deg));
+    opacity: var(--bg-pattern-opacity, 0);
+  }
   .icone-like-svg {
     position: absolute; left: 20px; top: 50%; width: 60px; z-index: 2;
     filter: brightness(0) invert(1); transform-origin: center bottom;
@@ -384,28 +406,29 @@
 </style>
 </head>
 <body>
-<div class="widget-container" id="widget" style="top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgb(0, 0, 0); border-radius: 8px;">
-  <div id="progresso" class="barra-progresso" style="position: absolute; inset: 0px auto auto 0px; width: 58.6667%; height: 100%; opacity: 0.55; transition: width 1.5s ease-in-out; z-index: 1; clip-path: none; border-radius: 8px; filter: none; --rot-pattern: -17deg; --anim-x: 120px; --anim-y: 0px; --pattern-bg: url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSczNCcgaGVpZ2h0PSczNCcgdmlld0JveD0nMCAwIDM0IDM0Jz48ZyB0cmFuc2Zvcm09J3JvdGF0ZSgwIDE3IDE0LjUpJz48cGF0aCBmaWxsPScjMDAwMDAwJyBzdHJva2U9J25vbmUnIHN0cm9rZS13aWR0aD0nMS4yJyBkPSdNMTMgMTRsMi04Yy41LTEuOCAzLTEuNSAzLjEuNHY0LjZoNi42YzEuOCAwIDMgMS43IDIuNSAzLjRsLTIgOC4yYy0uMyAxLjItMS40IDItMi43IDJIMTNWMTR6bS01IDBoM3YxMUg4Yy0xLjEgMC0yLS45LTItMnYtN2MwLTEuMS45LTIgMi0yeicvPjwvZz48L3N2Zz4=&quot;); --pattern-size: 120px 120px; --pattern-pos: center; --pattern-anim: barraPatternScroll 1.10s linear infinite; display: block; background-color: rgb(255, 0, 0);">
+<div class="widget-container" id="widget" style="box-shadow: rgba(0, 0, 0, 0.77) 5px 6px 11px; background-color: rgb(0, 0, 0); border-radius: 8px; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+  <div class="bg-pattern" id="bg-pattern" style="--bg-pattern-bg: linear-gradient(to right, rgba(255,255,255,0.22) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.22) 1px, transparent 1px); --bg-pattern-size: 27px 27px; --bg-pattern-rot: 0deg; --bg-pattern-opacity: 0.48;"></div>
+  <div id="progresso" class="barra-progresso" style="position: absolute; inset: 0px auto auto 0px; width: 98%; height: 100%; opacity: 0.71; transition: width 1.5s ease-in-out; z-index: 1; clip-path: none; border-radius: 8px; filter: none; --rot-pattern: -17deg; --anim-x: 90px; --anim-y: 0px; --pattern-bg: url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc0MycgaGVpZ2h0PSc0Mycgdmlld0JveD0nMCAwIDQzIDQzJz48ZGVmcz48ZmlsdGVyIGlkPSdyZWNvbG9yJz48ZmVGbG9vZCBmbG9vZC1jb2xvcj0nIzAwMDAwMCcgcmVzdWx0PSdmbG9vZCcvPjxmZUNvbXBvc2l0ZSBpbj0nZmxvb2QnIGluMj0nU291cmNlQWxwaGEnIG9wZXJhdG9yPSdpbicvPjwvZmlsdGVyPjwvZGVmcz48ZyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSg0LjUgNC41KSByb3RhdGUoMyAxNyAxNyknIGZpbHRlcj0ndXJsKCNyZWNvbG9yKSc+PGltYWdlIGhyZWY9J2RhdGE6aW1hZ2Uvc3ZnK3htbDtiYXNlNjQsUEhOMlp5QjRiV3h1Y3owaWFIUjBjRG92TDNkM2R5NTNNeTV2Y21jdk1qQXdNQzl6ZG1jaUlIaHRiRzV6T25oc2FXNXJQU0pvZEhSd09pOHZkM2QzTG5jekxtOXlaeTh4T1RrNUwzaHNhVzVySWlCbWFXeHNQU0lqTURBd01EQXdJaUIzYVdSMGFEMGlPREF3Y0hnaUlHaGxhV2RvZEQwaU9EQXdjSGdpSUhacFpYZENiM2c5SWpBZ01DQTFNVElnTlRFeUlpQnBaRDBpWDNnek1GOHhJaUIyWlhKemFXOXVQU0l4TGpFaUlIaHRiRHB6Y0dGalpUMGljSEpsYzJWeWRtVWlQZ29LUEdjK0NnbzhjR0YwYUNCa1BTSk5PREFzTVRnMlNESXdZeTB4TVM0d05EWXNNQzB5TUN3NExqazFOQzB5TUN3eU1IWXlOVEJqTUN3eE1TNHdORFlzT0M0NU5UUXNNakFzTWpBc01qQm9OakJqTVRFdU1EUTJMREFzTWpBdE9DNDVOVFFzTWpBdE1qQldNakEySUNBZ1F6RXdNQ3d4T1RRdU9UVTBMRGt4TGpBME5pd3hPRFlzT0RBc01UZzJlaUl2UGdvS1BIQmhkR2dnWkQwaVRUTXpOeTR4TXpjc01UZzJZeTB4TlM0MExEQXRNalV1TWpRM0xURTJMalF4TVMweE9DMHpNR3d6Tmk0ME16UXROamd1TXpFelF6TTJPQzR3TlRjc05qUXVNamMxTERNMU1TNHdPVElzTXpZc016STBMalUxT1N3ek5tZ3dJQ0FnWXkwNUxqTXlNaXd3TFRFNExqSTJNU3d6TGpjd015MHlOQzQ0TlRNc01UQXVNamswVERFNE15NDBNekVzTVRZeUxqVTJPVU14TmpndU5ESTVMREUzTnk0MU56SXNNVFl3TERFNU55NDVNaXd4TmpBc01qRTVMakV6TjFZek9UWmpNQ3cwTkM0eE9ETXNNelV1T0RFM0xEZ3dMRGd3TERnd0lDQWdhREUyTlM0Mk5EUmpNamN1TXpBMExEQXNOVEV1TVRZMUxURTRMalF6TlN3MU9DNHdOVGN0TkRRdU9EVTFiRFEyTGpVM055MHhOemd1TlRRMFl6RXVNVFF6TFRRdU16Z3pMREV1TnpJeUxUZ3VPRGswTERFdU56SXlMVEV6TGpReU0zWXdJQ0FnUXpVeE1pd3lNRGt1T0RBNUxEUTRPQzR4T1RFc01UZzJMRFExT0M0NE1qSXNNVGcyU0RNek55NHhNemQ2SWk4K0NnbzhMMmMrQ2dvOEwzTjJaejQ9JyB3aWR0aD0nMzQnIGhlaWdodD0nMzQnLz48L2c+PC9zdmc+&quot;); --pattern-size: 90px 90px; --pattern-pos: center; --pattern-anim: barraPatternScroll 1.10s linear infinite; display: block; background-color: rgb(255, 0, 0);">
     <div class="barra-fill"></div>
     <div id="onda-cap" class="onda-bubble-container" style="display:none;">
       <div class="onda-bubble"></div>
       <div class="onda-bubble-atras"></div>
     </div>
   </div>
-  <img src="https://www.svgrepo.com/show/415785/thumbsup-ui-like.svg" class="icone-like-svg anim-wiggle" id="icone-like" style="filter: brightness(0) invert(1);">
+  <img src="https://www.svgrepo.com/show/415785/thumbsup-ui-like.svg" class="icone-like-svg anim-wiggle" id="icone-like" style="filter: brightness(0) invert(1) drop-shadow(rgba(0, 0, 0, 0.84) 6px 4px 4px); width: 65px;">
   <div class="area-textos">
-    <div class="texto-chamada" id="texto-chamada-widget" style="font-family: Righteous, cursive; text-shadow: none; font-weight: 700; font-style: italic; transform: translate(0px, 0px);">DEIXA O <span class="verde" id="texto-like-widget">LIKE!</span></div>
-    <div class="contador-likes" id="contador" style="font-family: &quot;Russo One&quot;, sans-serif; text-shadow: none; font-weight: 700; font-style: normal; transform: translate(0px, 0px);"><span id="atual">88</span> / <span id="meta">150</span></div>
+    <div class="texto-chamada" id="texto-chamada-widget" style="font-family: Righteous, cursive; text-shadow: rgb(0, 0, 0) 2px 2px 4px; font-weight: 700; font-style: italic; transform: translate(0px, 0px); font-size: 22px;">DEIXA O <span class="verde" id="texto-like-widget">LIKE!</span></div>
+    <div class="contador-likes" id="contador" style="font-family: &quot;Russo One&quot;, sans-serif; text-shadow: rgb(0, 0, 0) 2px 2px 4px; font-weight: 700; font-style: normal; transform: translate(0px, 0px); font-size: 46px;"><span id="atual">98</span> / <span id="meta">100</span></div>
   </div>
 </div>
 
-<div class="toast-container" id="toast-container"><div class="toast toast-success show"><span class="toast-icon">✓</span> <span>CONFIGURAÇÃO SALVA NO NAVEGADOR!</span></div><div class="toast toast-success show"><span class="toast-icon">✓</span> <span>CONFIGURAÇÃO SALVA NO NAVEGADOR!</span></div></div>
+<div class="toast-container" id="toast-container"><div class="toast toast-success show"><span class="toast-icon">✓</span> <span>CONFIGURAÇÃO SALVA NO NAVEGADOR!</span></div></div>
 
 <div id="painel">
   <div class="painel-header">
     <div style="display:flex; flex-direction:column; gap:2px;">
       <h3>⚙ Widget Likes — Painel de Controle</h3>
-      <span id="status-badge" class="status-online" style="width:fit-content; font-size:9px;">ON LINE</span>
+      <span id="status-badge" class="status-offline" style="width:fit-content; font-size:9px;">OFFLINE</span>
     </div>
     <div style="display:flex; gap:8px;">
       <button class="btn btn-red" onclick="salvarConfigComFeedback()" title="Salvar no Navegador">💾 SALVAR</button>
@@ -436,7 +459,7 @@
       </div>
     </div>
     <div class="divisor"></div>
-    <div class="painel-row"><span class="painel-label">VIDEO ID ATUAL</span><span id="video-id-display" style="font-family:'Share Tech Mono',monospace;font-size:11px;color:#444;">• BGraxWJ1j4E</span></div>
+    <div class="painel-row"><span class="painel-label">VIDEO ID ATUAL</span><span id="video-id-display" style="font-family:'Share Tech Mono',monospace;font-size:11px;color:#444;">—</span></div>
     <div class="divisor"></div>
     <div class="painel-row" style="background:rgba(255,51,51,0.05); padding:12px; border-radius:8px; border:1px solid rgba(255,51,51,0.1);">
       <div style="display:flex; flex-direction:column; gap:8px; width:100%;">
@@ -452,11 +475,11 @@
             <span class="toggle-label" style="font-size:9px; color:#ff8800;">SIMULAR</span>
           </div>
         </div>
-        <div id="controles-simulacao" style="display: none; flex-direction: column; gap: 10px; margin-top: 5px; padding-top: 10px; border-top: 1px dashed rgba(255, 51, 51, 0.2);">
+        <div id="controles-simulacao" style="display:none; flex-direction:column; gap:10px; margin-top:5px; padding-top:10px; border-top:1px dashed rgba(255,51,51,0.2);">
           <div class="painel-row">
             <span class="painel-label" style="min-width:100px;">BASE DE LIKES</span>
             <input type="range" id="sim-range" class="slider-custom" min="0" max="10000" value="500" oninput="ajustarBaseSimulacao()">
-            <span id="sim-valor" class="valor-label">1.250</span>
+            <span id="sim-valor" class="valor-label">500</span>
           </div>
           <div class="painel-row" style="justify-content:center; gap:15px;">
             <button class="btn btn-red" style="flex:1; height:40px; font-size:14px;" onclick="adicionarUmLikeSimulado()">🔥 +1 LIKE (TESTAR PULO)</button>
@@ -511,9 +534,9 @@
     <div class="divisor"></div>
     <div class="painel-row">
       <span class="painel-label">DEBUG LIKES</span>
-      <span id="debug-likes" style="font-family:'Share Tech Mono',monospace; font-size:10px; color:#ff3333;">88</span>
+      <span id="debug-likes" style="font-family:'Share Tech Mono',monospace; font-size:10px; color:#ff3333;">98</span>
       <span class="painel-label" style="margin-left:20px;">DEBUG META</span>
-      <span id="debug-meta" style="font-family:'Share Tech Mono',monospace; font-size:10px; color:#ff3333;">5000 (inc 1000) [ON]</span>
+      <span id="debug-meta" style="font-family:'Share Tech Mono',monospace; font-size:10px; color:#ff3333;">100 (inc 10) [ON]</span>
     </div>
     <div class="painel-row" style="margin-top:8px;">
       <button class="btn btn-dark" style="width:100%; font-size:9px; border-color:#444;" onclick="forcarConfigDoArquivo()">↻ FORÇAR CONFIG DO ARQUIVO</button>
@@ -545,7 +568,7 @@
       </div>
       <span class="painel-label" style="min-width:60px;margin-left:12px;">TAMANHO</span>
       <input type="range" id="font-size-range" class="slider-custom" min="12" max="36" value="20">
-      <span id="font-size-valor" class="valor-label">20px</span>
+      <span id="font-size-valor" class="valor-label">22px</span>
     </div>
     <div class="painel-row">
       <span class="painel-label" style="min-width:60px;">ESTILO</span>
@@ -570,7 +593,7 @@
       </div>
       <span class="painel-label" style="min-width:60px;margin-left:12px;">TAMANHO</span>
       <input type="range" id="num-size-range" class="slider-custom" min="20" max="72" value="40">
-      <span id="num-size-valor" class="valor-label">40px</span>
+      <span id="num-size-valor" class="valor-label">46px</span>
     </div>
     <div class="painel-row">
       <span class="painel-label" style="min-width:60px;">ESTILO</span>
@@ -649,7 +672,7 @@
     <div class="painel-row">
       <span class="painel-label">TAMANHO ÍCONE</span>
       <input type="range" class="slider-custom" id="icon-size-range" min="30" max="100" value="60" style="width:130px;" oninput="aplicarTamanhoIcone()">
-      <span id="icon-size-valor" class="valor-label">60px</span>
+      <span id="icon-size-valor" class="valor-label">65px</span>
     </div>
     <div class="divisor"></div>
     <div class="painel-row" style="align-items:flex-start;">
@@ -671,12 +694,12 @@
       </div>
       <span class="painel-label" style="min-width:60px;margin-left:12px;">OPACIDADE</span>
       <input type="range" id="icon-shadow-opacity" class="slider-custom" min="0" max="100" value="50" oninput="aplicarSombraIcone()">
-      <span id="icon-shadow-opacity-valor" class="valor-label">50%</span>
+      <span id="icon-shadow-opacity-valor" class="valor-label">84%</span>
     </div>
     <div class="painel-row">
       <span class="painel-label">DIREÇÃO X</span>
       <input type="range" id="icon-shadow-x" class="slider-custom" min="-20" max="20" value="4" oninput="aplicarSombraIcone()">
-      <span id="icon-shadow-x-valor" class="valor-label">4px</span>
+      <span id="icon-shadow-x-valor" class="valor-label">6px</span>
       <span class="painel-label" style="min-width:60px;margin-left:12px;">DIREÇÃO Y</span>
       <input type="range" id="icon-shadow-y" class="slider-custom" min="-20" max="20" value="4" oninput="aplicarSombraIcone()">
       <span id="icon-shadow-y-valor" class="valor-label">4px</span>
@@ -753,7 +776,7 @@
     <div class="painel-row">
       <span class="painel-label">OPACIDADE</span>
       <input type="range" class="slider-custom" id="barra-opacity-range" min="10" max="100" value="100" style="width:120px;" oninput="aplicarOpacidadeBarra()">
-      <span id="barra-opacity-valor" class="valor-label">55%</span>
+      <span id="barra-opacity-valor" class="valor-label">71%</span>
     </div>
     <div class="divisor"></div>
     <div class="painel-row">
@@ -765,7 +788,7 @@
     <div class="painel-row">
       <span class="painel-label">PATTERN</span>
       <button class="btn btn-dark" id="btn-pattern-opcoes" onclick="togglePatternOptions()">OPÇÕES</button>
-      <span class="toggle-label" id="pattern-status-label">ABERTO</span>
+      <span class="toggle-label" id="pattern-status-label">FECHADO</span>
       <div id="imagem-custom-wrap" style="display: flex; flex-direction: column; gap: 8px; margin-left: 15px; width: 240px;">
         <div style="display:flex;align-items:center;gap:8px;">
           <span class="toggle-label">URL SVG</span>
@@ -778,20 +801,25 @@
         </div>
       </div>
     </div>
-    <div class="painel-row" id="pattern-opcoes-escala" style="display: flex;">
+    <div class="painel-row" id="pattern-opcoes-escala" style="display:none;">
       <span class="painel-label">ESCALA (TAMANHO)</span>
       <input type="range" class="slider-custom" id="barra-pattern-range" min="10" max="500" value="100" style="width:120px;" oninput="aplicarPatternBarra()">
-      <span id="barra-pattern-valor" class="valor-label">352%</span>
+      <span id="barra-pattern-valor" class="valor-label">209%</span>
     </div>
-    <div class="painel-row" id="pattern-opcoes-rot" style="display: flex;">
+    <div class="painel-row" id="pattern-opcoes-gap" style="display:none;">
+      <span class="painel-label">ESPAÇAMENTO</span>
+      <input type="range" class="slider-custom" id="barra-pattern-gap-range" min="0" max="200" value="0" style="width:120px;" oninput="aplicarEspacamentoPatternBarra()">
+      <span id="barra-pattern-gap-valor" class="valor-label">9px</span>
+    </div>
+    <div class="painel-row" id="pattern-opcoes-rot" style="display:none;">
       <span class="painel-label">ROTAÇÃO GLOBAL</span>
       <input type="range" class="slider-custom" id="barra-pattern-rot-range" min="-180" max="180" value="0" style="width:120px;" oninput="aplicarRotacaoPatternBarra()">
       <span id="barra-pattern-rot-valor" class="valor-label">-17deg</span>
     </div>
-    <div class="painel-row" id="pattern-opcoes-rot-indiv" style="display: flex;">
+    <div class="painel-row" id="pattern-opcoes-rot-indiv" style="display:none;">
       <span class="painel-label">ROTAÇÃO INDIVIDUAL</span>
       <input type="range" class="slider-custom" id="barra-pattern-rot-indiv-range" min="-180" max="180" value="0" style="width:120px;" oninput="aplicarRotacaoIndividualBarra()">
-      <span id="barra-pattern-rot-indiv-valor" class="valor-label">0deg</span>
+      <span id="barra-pattern-rot-indiv-valor" class="valor-label">3deg</span>
     </div>
     <div class="divisor"></div>
     <div class="divisor"></div>
@@ -850,21 +878,81 @@
       <input type="range" class="slider-custom" id="bar-radius-range" min="0" max="55" value="8" oninput="aplicarRoundness()">
       <span id="bar-radius-valor" class="valor-label">8px</span>
     </div>
+    <div class="divisor"></div>
+    <div class="painel-row">
+      <span class="painel-label">SOMBRA FUNDO</span>
+      <div class="toggle-wrap">
+        <label class="toggle"><input type="checkbox" id="toggle-widget-shadow" onchange="aplicarSombraFundo()"><div class="toggle-track"></div><div class="toggle-thumb"></div></label>
+        <span class="toggle-label">ATIVAR</span>
+      </div>
+      <span class="painel-label" style="min-width:60px;margin-left:12px;">OPACIDADE</span>
+      <input type="range" id="widget-shadow-opacity" class="slider-custom" min="0" max="100" value="50" oninput="aplicarSombraFundo()">
+      <span id="widget-shadow-opacity-valor" class="valor-label">77%</span>
+    </div>
+    <div class="painel-row">
+      <span class="painel-label">DIREÇÃO X</span>
+      <input type="range" id="widget-shadow-x" class="slider-custom" min="-40" max="40" value="6" oninput="aplicarSombraFundo()">
+      <span id="widget-shadow-x-valor" class="valor-label">5px</span>
+      <span class="painel-label" style="min-width:60px;margin-left:12px;">DIREÇÃO Y</span>
+      <input type="range" id="widget-shadow-y" class="slider-custom" min="-40" max="40" value="6" oninput="aplicarSombraFundo()">
+      <span id="widget-shadow-y-valor" class="valor-label">6px</span>
+    </div>
+    <div class="painel-row">
+      <span class="painel-label">DIFUSÃO (BLUR)</span>
+      <input type="range" id="widget-shadow-blur" class="slider-custom" min="0" max="80" value="14" style="width:120px;" oninput="aplicarSombraFundo()">
+      <span id="widget-shadow-blur-valor" class="valor-label">11px</span>
+    </div>
+    <div class="divisor"></div>
+    <div class="painel-row" style="background:rgba(255,255,255,0.03); padding:12px; border-radius:8px; border:1px solid rgba(255,255,255,0.06);">
+      <div style="display:flex; flex-direction:column; gap:8px; width:100%;">
+        <div style="display:flex; align-items:center; justify-content:space-between;">
+          <span class="painel-label" style="color:#aaa; font-weight:bold;">PATTERN FUNDO</span>
+          <label class="toggle">
+            <input type="checkbox" id="toggle-bg-pattern" onchange="aplicarPatternFundo()">
+            <div class="toggle-track"></div>
+            <div class="toggle-thumb"></div>
+          </label>
+        </div>
+        <div id="bg-pattern-controls" style="display: flex; flex-direction: column; gap: 10px; padding-top: 10px; border-top: 1px dashed rgba(255, 255, 255, 0.12);">
+          <div class="style-grid">
+            <div class="style-card bg-pattern-card selecionada" data-bgpattern="grid" onclick="selecionarBgPattern(this)">GRID</div>
+            <div class="style-card bg-pattern-card" data-bgpattern="dots" onclick="selecionarBgPattern(this)">DOTS</div>
+            <div class="style-card bg-pattern-card" data-bgpattern="diagonal" onclick="selecionarBgPattern(this)">DIAGONAL</div>
+            <div class="style-card bg-pattern-card" data-bgpattern="carbon" onclick="selecionarBgPattern(this)">CARBON</div>
+          </div>
+          <div class="painel-row">
+            <span class="painel-label" style="min-width:120px;">OPACIDADE</span>
+            <input type="range" id="bg-pattern-opacity" class="slider-custom" min="0" max="100" value="18" style="width:140px;" oninput="aplicarPatternFundo()">
+            <span id="bg-pattern-opacity-valor" class="valor-label">48%</span>
+          </div>
+          <div class="painel-row">
+            <span class="painel-label" style="min-width:120px;">ESCALA</span>
+            <input type="range" id="bg-pattern-scale" class="slider-custom" min="20" max="300" value="100" style="width:140px;" oninput="aplicarPatternFundo()">
+            <span id="bg-pattern-scale-valor" class="valor-label">76%</span>
+          </div>
+          <div class="painel-row">
+            <span class="painel-label" style="min-width:120px;">ROTAÇÃO</span>
+            <input type="range" id="bg-pattern-rot" class="slider-custom" min="-180" max="180" value="0" style="width:140px;" oninput="aplicarPatternFundo()">
+            <span id="bg-pattern-rot-valor" class="valor-label">0deg</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
 <script>
   const CONFIG_PADRAO = {
   "apiKey": "AIzaSyBWuNzYAkVQkV-fkLriMQ86XWdY0aF3JpA",
-  "channelId": "UCMfSRQyeDFsofyxRYeGBBtQ",
+  "channelId": "UCDKMzIuS57PHryJPfqXiFSg",
   "modoSimulado": false,
   "simBaseLikes": "1250",
-  "meta": "150",
+  "meta": "100",
   "metaDinamica": true,
-  "metaIncremento": "1000",
-  "fontSize": "20",
-  "numSize": "40",
-  "shadowAtivo": false,
+  "metaIncremento": "10",
+  "fontSize": "22",
+  "numSize": "46",
+  "shadowAtivo": true,
   "shadowCor": "#000000",
   "shadowBlur": "4",
   "corChamada": "#ffffff",
@@ -880,11 +968,12 @@
   "corBarra3": "#ffffff",
   "noCor3": true,
   "direcaoAnim": "ltr",
-  "opacidadeBarra": "55",
+  "opacidadeBarra": "71",
   "velocidadeBarra": "1",
-  "escalaPattern": "352",
+  "escalaPattern": "209",
+  "patternGap": "9",
   "rotacaoPattern": "-17",
-  "rotacaoIndiv": "0",
+  "rotacaoIndiv": "3",
   "barraVisivel": true,
   "ondaAtiva": false,
   "corOnda1": "#ff0000",
@@ -892,6 +981,16 @@
   "speedOnda": "1",
   "radiusWidget": "8",
   "radiusBar": "8",
+  "widgetShadowAtivo": true,
+  "widgetShadowOp": "77",
+  "widgetShadowX": "5",
+  "widgetShadowY": "6",
+  "widgetShadowBlur": "11",
+  "bgPatternAtivo": true,
+  "bgPatternTipo": "grid",
+  "bgPatternOp": "48",
+  "bgPatternScale": "76",
+  "bgPatternRot": "0",
   "textoChamada": "DEIXA O",
   "textoDestaque": "LIKE!",
   "textMainX": "0",
@@ -905,12 +1004,12 @@
   "fonteTexto": "Righteous",
   "fonteNumeros": "Russo One",
   "svgUrl": "",
-  "svgCode": "",
+  "svgCode": "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" fill=\"#000000\" width=\"800px\" height=\"800px\" viewBox=\"0 0 512 512\" id=\"_x30_1\" version=\"1.1\" xml:space=\"preserve\">\n\n<g>\n\n<path d=\"M80,186H20c-11.046,0-20,8.954-20,20v250c0,11.046,8.954,20,20,20h60c11.046,0,20-8.954,20-20V206   C100,194.954,91.046,186,80,186z\"/>\n\n<path d=\"M337.137,186c-15.4,0-25.247-16.411-18-30l36.434-68.313C368.057,64.275,351.092,36,324.559,36h0   c-9.322,0-18.261,3.703-24.853,10.294L183.431,162.569C168.429,177.572,160,197.92,160,219.137V396c0,44.183,35.817,80,80,80   h165.644c27.304,0,51.165-18.435,58.057-44.855l46.577-178.544c1.143-4.383,1.722-8.894,1.722-13.423v0   C512,209.809,488.191,186,458.822,186H337.137z\"/>\n\n</g>\n\n</svg>",
   "iconCustomUrl": "",
   "iconCustomCode": "",
-  "iconeShadowAtivo": false,
-  "iconeShadowOp": "50",
-  "iconeShadowX": "4",
+  "iconeShadowAtivo": true,
+  "iconeShadowOp": "84",
+  "iconeShadowX": "6",
   "iconeShadowY": "4",
   "iconeShadowBlur": "4",
   "eventIconColor": "#00ff44",
@@ -920,7 +1019,7 @@
   "posicaoWidget": "center",
   "iconeUrl": "https://www.svgrepo.com/show/415785/thumbsup-ui-like.svg",
   "animClasse": "anim-wiggle",
-  "configId": "mn9ta56164ztob"
+  "configId": "mn9uli5f9k3zcd"
 };
 
   let API_KEY = "";
@@ -950,6 +1049,12 @@
   let opacidadeBarra = 1;
   let velocidadeAnimBarra = 1;
   let escalaPatternBarra = 1;
+  let espacoPatternBarra = 0;
+  let bgPatternAtivo = false;
+  let bgPatternTipo = "grid";
+  let bgPatternOp = 18;
+  let bgPatternScale = 100;
+  let bgPatternRot = 0;
   let rotacaoPatternBarra = 0;
   let rotacaoIndividualBarra = 0;
   let animAtual = "anim-wiggle";
@@ -1303,6 +1408,7 @@
 
     if (estiloBarra === "imagem") tileSize = 34;
     if (estiloBarra === "candy") tileSize = 20;
+    if (estiloBarra === "imagem") tileSize = 34 + espacoPatternBarra;
 
     const patVal = Math.round(tileSize * escalaPatternBarra);
     let animX = 0, animY = 0;
@@ -1379,24 +1485,27 @@
         
         const recolorFilter = (cor2 !== 'transparent') ? `<filter id='recolor'><feFlood flood-color='${cor2}' result='flood'/><feComposite in='flood' in2='SourceAlpha' operator='in'/></filter>` : "";
         const filterAttr = (cor2 !== 'transparent') ? "filter='url(#recolor)'" : "";
+        const gap = Math.max(0, Math.min(200, Number(espacoPatternBarra) || 0));
+        const tile = 34 + gap;
+        const off = gap / 2;
 
         if (customUrl.endsWith('.svg') || customCode) {
           if (cachedExternalSVGContent) {
-            const wrapperSVG = `<svg xmlns='http://www.w3.org/2000/svg' width='34' height='34' viewBox='0 0 34 34'><defs>${recolorFilter}</defs><g transform='rotate(${rotacaoIndividualBarra} 17 17)' ${filterAttr}><image href='${cachedExternalSVGContent}' width='34' height='34'/></g></svg>`;
+            const wrapperSVG = `<svg xmlns='http://www.w3.org/2000/svg' width='${tile}' height='${tile}' viewBox='0 0 ${tile} ${tile}'><defs>${recolorFilter}</defs><g transform='translate(${off} ${off}) rotate(${rotacaoIndividualBarra} 17 17)' ${filterAttr}><image href='${cachedExternalSVGContent}' width='34' height='34'/></g></svg>`;
             const wrapperBase64 = btoa(new TextEncoder().encode(wrapperSVG).reduce((data, byte) => data + String.fromCharCode(byte), ''));
             svgContent = `url("data:image/svg+xml;base64,${wrapperBase64}")`;
           } else {
             svgContent = `url("${customUrl}")`;
           }
         } else {
-          const defaultSVG = `<svg xmlns='http://www.w3.org/2000/svg' width='34' height='34' viewBox='0 0 34 34'><g transform='rotate(${rotacaoIndividualBarra} 17 14.5)'><path fill='${cor2}' stroke='${cor3 === 'transparent' ? 'none' : cor3}' stroke-width='1.2' d='M13 14l2-8c.5-1.8 3-1.5 3.1.4v4.6h6.6c1.8 0 3 1.7 2.5 3.4l-2 8.2c-.3 1.2-1.4 2-2.7 2H13V14zm-5 0h3v11H8c-1.1 0-2-.9-2-2v-7c0-1.1.9-2 2-2z'/></g></svg>`;
+          const defaultSVG = `<svg xmlns='http://www.w3.org/2000/svg' width='${tile}' height='${tile}' viewBox='0 0 ${tile} ${tile}'><g transform='translate(${off} ${off}) rotate(${rotacaoIndividualBarra} 17 14.5)'><path fill='${cor2}' stroke='${cor3 === 'transparent' ? 'none' : cor3}' stroke-width='1.2' d='M13 14l2-8c.5-1.8 3-1.5 3.1.4v4.6h6.6c1.8 0 3 1.7 2.5 3.4l-2 8.2c-.3 1.2-1.4 2-2.7 2H13V14zm-5 0h3v11H8c-1.1 0-2-.9-2-2v-7c0-1.1.9-2 2-2z'/></g></svg>`;
           const defaultBase64 = btoa(new TextEncoder().encode(defaultSVG).reduce((data, byte) => data + String.fromCharCode(byte), ''));
           svgContent = `url("data:image/svg+xml;base64,${defaultBase64}")`;
         }
         
         barra.style.backgroundColor = cor1;
         barra.style.setProperty("--pattern-bg", svgContent);
-        barra.style.setProperty("--pattern-size", `${pat(34)} ${pat(34)}`);
+        barra.style.setProperty("--pattern-size", `${pat(tile)} ${pat(tile)}`);
         barra.style.setProperty("--pattern-anim", `barraPatternScroll ${dur(1.1)} linear infinite`);
         break;
     }
@@ -1420,6 +1529,12 @@
     document.getElementById("barra-pattern-valor").innerText = `${val}%`;
     aplicarEstiloBarra();
   }
+  function aplicarEspacamentoPatternBarra() {
+    const val = parseInt(document.getElementById("barra-pattern-gap-range").value, 10);
+    espacoPatternBarra = Math.max(0, Math.min(200, val));
+    document.getElementById("barra-pattern-gap-valor").innerText = `${espacoPatternBarra}px`;
+    aplicarEstiloBarra();
+  }
   function aplicarRotacaoPatternBarra() {
     const val = parseInt(document.getElementById("barra-pattern-rot-range").value, 10);
     rotacaoPatternBarra = val;
@@ -1433,7 +1548,7 @@
     aplicarEstiloBarra();
   }
   function togglePatternOptions() {
-    const ids = ["pattern-opcoes-escala","pattern-opcoes-rot","pattern-opcoes-rot-indiv"];
+    const ids = ["pattern-opcoes-escala","pattern-opcoes-gap","pattern-opcoes-rot","pattern-opcoes-rot-indiv"];
     const aberto = document.getElementById(ids[0]).style.display !== "none";
     const novo = aberto ? "none" : "flex";
     ids.forEach(id => document.getElementById(id).style.display = novo);
@@ -1654,6 +1769,74 @@
     document.getElementById("progresso").style.borderRadius = vBar + "px";
     
     aplicarEstiloBarra();
+  }
+
+  function aplicarSombraFundo() {
+    const ativo = document.getElementById("toggle-widget-shadow").checked;
+    const op = document.getElementById("widget-shadow-opacity").value;
+    const x = document.getElementById("widget-shadow-x").value;
+    const y = document.getElementById("widget-shadow-y").value;
+    const blur = document.getElementById("widget-shadow-blur").value;
+    
+    document.getElementById("widget-shadow-opacity-valor").innerText = op + "%";
+    document.getElementById("widget-shadow-x-valor").innerText = x + "px";
+    document.getElementById("widget-shadow-y-valor").innerText = y + "px";
+    document.getElementById("widget-shadow-blur-valor").innerText = blur + "px";
+    
+    const w = document.getElementById("widget");
+    w.style.boxShadow = ativo ? `${x}px ${y}px ${blur}px rgba(0,0,0,${op/100})` : "none";
+  }
+
+  function aplicarPatternFundo() {
+    const ativo = document.getElementById("toggle-bg-pattern").checked;
+    const tipo = document.querySelector(".bg-pattern-card.selecionada")?.getAttribute("data-bgpattern") || "grid";
+    const op = parseInt(document.getElementById("bg-pattern-opacity").value, 10);
+    const scale = parseInt(document.getElementById("bg-pattern-scale").value, 10);
+    const rot = parseInt(document.getElementById("bg-pattern-rot").value, 10);
+
+    bgPatternAtivo = ativo;
+    bgPatternTipo = tipo;
+    bgPatternOp = Number.isFinite(op) ? op : 0;
+    bgPatternScale = Number.isFinite(scale) ? scale : 100;
+    bgPatternRot = Number.isFinite(rot) ? rot : 0;
+
+    document.getElementById("bg-pattern-opacity-valor").innerText = `${bgPatternOp}%`;
+    document.getElementById("bg-pattern-scale-valor").innerText = `${bgPatternScale}%`;
+    document.getElementById("bg-pattern-rot-valor").innerText = `${bgPatternRot}deg`;
+
+    const layer = document.getElementById("bg-pattern");
+    const size = Math.max(6, Math.round(36 * (bgPatternScale / 100)));
+
+    let bg = "none";
+    let bgSize = `${size}px ${size}px`;
+
+    if (bgPatternAtivo) {
+      if (bgPatternTipo === "grid") {
+        bg = `linear-gradient(to right, rgba(255,255,255,0.22) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.22) 1px, transparent 1px)`;
+      } else if (bgPatternTipo === "dots") {
+        bg = `radial-gradient(circle, rgba(255,255,255,0.22) 2px, transparent 2.2px)`;
+        bgSize = `${Math.max(8, Math.round(size * 0.75))}px ${Math.max(8, Math.round(size * 0.75))}px`;
+      } else if (bgPatternTipo === "diagonal") {
+        bg = `repeating-linear-gradient(45deg, rgba(255,255,255,0.24) 0 4px, transparent 4px 14px)`;
+      } else if (bgPatternTipo === "carbon") {
+        bg = `repeating-linear-gradient(0deg, rgba(255,255,255,0.18) 0 1px, transparent 1px 10px), repeating-linear-gradient(90deg, rgba(255,255,255,0.12) 0 1px, transparent 1px 10px)`;
+        bgSize = `${Math.max(10, Math.round(size * 0.9))}px ${Math.max(10, Math.round(size * 0.9))}px`;
+      }
+    }
+
+    layer.style.setProperty("--bg-pattern-bg", bg);
+    layer.style.setProperty("--bg-pattern-size", bgSize);
+    layer.style.setProperty("--bg-pattern-rot", `${bgPatternRot}deg`);
+    layer.style.setProperty("--bg-pattern-opacity", bgPatternAtivo ? String(bgPatternOp / 100) : "0");
+
+    const wrap = document.getElementById("bg-pattern-controls");
+    wrap.style.display = bgPatternAtivo ? "flex" : "none";
+  }
+
+  function selecionarBgPattern(el) {
+    document.querySelectorAll(".bg-pattern-card").forEach(c => c.classList.remove("selecionada"));
+    el.classList.add("selecionada");
+    aplicarPatternFundo();
   }
 
   function aplicarTextos() {
@@ -1924,6 +2107,7 @@
       opacidadeBarra: document.getElementById("barra-opacity-range").value,
       velocidadeBarra: document.getElementById("barra-speed-range").value,
       escalaPattern: document.getElementById("barra-pattern-range").value,
+      patternGap: document.getElementById("barra-pattern-gap-range").value,
       rotacaoPattern: document.getElementById("barra-pattern-rot-range").value,
       rotacaoIndiv: document.getElementById("barra-pattern-rot-indiv-range").value,
       barraVisivel: document.getElementById("toggle-barra").checked,
@@ -1933,6 +2117,16 @@
       speedOnda: document.getElementById("onda-speed-range").value,
       radiusWidget: document.getElementById("widget-radius-range").value,
       radiusBar: document.getElementById("bar-radius-range").value,
+      widgetShadowAtivo: document.getElementById("toggle-widget-shadow").checked,
+      widgetShadowOp: document.getElementById("widget-shadow-opacity").value,
+      widgetShadowX: document.getElementById("widget-shadow-x").value,
+      widgetShadowY: document.getElementById("widget-shadow-y").value,
+      widgetShadowBlur: document.getElementById("widget-shadow-blur").value,
+      bgPatternAtivo: document.getElementById("toggle-bg-pattern").checked,
+      bgPatternTipo: document.querySelector(".bg-pattern-card.selecionada")?.getAttribute("data-bgpattern") || "grid",
+      bgPatternOp: document.getElementById("bg-pattern-opacity").value,
+      bgPatternScale: document.getElementById("bg-pattern-scale").value,
+      bgPatternRot: document.getElementById("bg-pattern-rot").value,
       textoChamada: document.getElementById("texto-chamada-input").value,
       textoDestaque: document.getElementById("texto-like-input").value,
       textMainX: document.getElementById("text-main-x").value,
@@ -2008,6 +2202,7 @@
       opacidadeBarra: document.getElementById("barra-opacity-range").value,
       velocidadeBarra: document.getElementById("barra-speed-range").value,
       escalaPattern: document.getElementById("barra-pattern-range").value,
+      patternGap: document.getElementById("barra-pattern-gap-range").value,
       rotacaoPattern: document.getElementById("barra-pattern-rot-range").value,
       rotacaoIndiv: document.getElementById("barra-pattern-rot-indiv-range").value,
       barraVisivel: document.getElementById("toggle-barra").checked,
@@ -2017,6 +2212,16 @@
       speedOnda: document.getElementById("onda-speed-range").value,
       radiusWidget: document.getElementById("widget-radius-range").value,
       radiusBar: document.getElementById("bar-radius-range").value,
+      widgetShadowAtivo: document.getElementById("toggle-widget-shadow").checked,
+      widgetShadowOp: document.getElementById("widget-shadow-opacity").value,
+      widgetShadowX: document.getElementById("widget-shadow-x").value,
+      widgetShadowY: document.getElementById("widget-shadow-y").value,
+      widgetShadowBlur: document.getElementById("widget-shadow-blur").value,
+      bgPatternAtivo: document.getElementById("toggle-bg-pattern").checked,
+      bgPatternTipo: document.querySelector(".bg-pattern-card.selecionada")?.getAttribute("data-bgpattern") || "grid",
+      bgPatternOp: document.getElementById("bg-pattern-opacity").value,
+      bgPatternScale: document.getElementById("bg-pattern-scale").value,
+      bgPatternRot: document.getElementById("bg-pattern-rot").value,
       textoChamada: document.getElementById("texto-chamada-input").value,
       textoDestaque: document.getElementById("texto-like-input").value,
       textMainX: document.getElementById("text-main-x").value,
@@ -2101,6 +2306,7 @@
       opacidadeBarra: document.getElementById("barra-opacity-range").value,
       velocidadeBarra: document.getElementById("barra-speed-range").value,
       escalaPattern: document.getElementById("barra-pattern-range").value,
+      patternGap: document.getElementById("barra-pattern-gap-range").value,
       rotacaoPattern: document.getElementById("barra-pattern-rot-range").value,
       rotacaoIndiv: document.getElementById("barra-pattern-rot-indiv-range").value,
       barraVisivel: document.getElementById("toggle-barra").checked,
@@ -2110,6 +2316,16 @@
       speedOnda: document.getElementById("onda-speed-range").value,
       radiusWidget: document.getElementById("widget-radius-range").value,
       radiusBar: document.getElementById("bar-radius-range").value,
+      widgetShadowAtivo: document.getElementById("toggle-widget-shadow").checked,
+      widgetShadowOp: document.getElementById("widget-shadow-opacity").value,
+      widgetShadowX: document.getElementById("widget-shadow-x").value,
+      widgetShadowY: document.getElementById("widget-shadow-y").value,
+      widgetShadowBlur: document.getElementById("widget-shadow-blur").value,
+      bgPatternAtivo: document.getElementById("toggle-bg-pattern").checked,
+      bgPatternTipo: document.querySelector(".bg-pattern-card.selecionada")?.getAttribute("data-bgpattern") || "grid",
+      bgPatternOp: document.getElementById("bg-pattern-opacity").value,
+      bgPatternScale: document.getElementById("bg-pattern-scale").value,
+      bgPatternRot: document.getElementById("bg-pattern-rot").value,
       textoChamada: document.getElementById("texto-chamada-input").value,
       textoDestaque: document.getElementById("texto-like-input").value,
       textMainX: document.getElementById("text-main-x").value,
@@ -2221,6 +2437,7 @@
     document.getElementById("barra-opacity-range").value = c.opacidadeBarra || 100;
     document.getElementById("barra-speed-range").value = c.velocidadeBarra || 1;
     document.getElementById("barra-pattern-range").value = c.escalaPattern || 100;
+    document.getElementById("barra-pattern-gap-range").value = c.patternGap || 0;
     document.getElementById("barra-pattern-rot-range").value = c.rotacaoPattern || 0;
     document.getElementById("barra-pattern-rot-indiv-range").value = c.rotacaoIndiv || 0;
     document.getElementById("toggle-barra").checked = c.barraVisivel !== undefined ? c.barraVisivel : true;
@@ -2230,6 +2447,15 @@
     document.getElementById("onda-speed-range").value = c.speedOnda || 1;
     document.getElementById("widget-radius-range").value = c.radiusWidget || 8;
     document.getElementById("bar-radius-range").value = c.radiusBar || 8;
+    document.getElementById("toggle-widget-shadow").checked = c.widgetShadowAtivo || false;
+    document.getElementById("widget-shadow-opacity").value = c.widgetShadowOp || 50;
+    document.getElementById("widget-shadow-x").value = c.widgetShadowX || 6;
+    document.getElementById("widget-shadow-y").value = c.widgetShadowY || 6;
+    document.getElementById("widget-shadow-blur").value = c.widgetShadowBlur || 14;
+    document.getElementById("toggle-bg-pattern").checked = c.bgPatternAtivo || false;
+    document.getElementById("bg-pattern-opacity").value = c.bgPatternOp || 18;
+    document.getElementById("bg-pattern-scale").value = c.bgPatternScale || 100;
+    document.getElementById("bg-pattern-rot").value = c.bgPatternRot || 0;
     document.getElementById("texto-chamada-input").value = c.textoChamada || "DEIXA O";
     document.getElementById("texto-like-input").value = c.textoDestaque || "LIKE!";
     document.getElementById("text-main-x").value = c.textMainX || 0;
@@ -2255,6 +2481,19 @@
     document.getElementById("event-icon-rot").value = c.eventIconRot || 0;
     document.getElementById("event-icon-scale").value = c.eventIconScale || 1.2;
     atualizarFiltroEvento();
+
+    aplicarPatternBarra();
+    aplicarEspacamentoPatternBarra();
+    aplicarRotacaoPatternBarra();
+    aplicarRotacaoIndividualBarra();
+    aplicarSombraFundo();
+    if (c.bgPatternTipo) {
+      const card = document.querySelector(`.bg-pattern-card[data-bgpattern="${c.bgPatternTipo}"]`);
+      if (card) selecionarBgPattern(card);
+      else aplicarPatternFundo();
+    } else {
+      aplicarPatternFundo();
+    }
 
     // Aplicar fontes salvas nos labels do picker
     if (c.fonteTexto) {
@@ -2348,6 +2587,8 @@
     aplicarEstilosTexto();
     aplicarPosicaoTextos();
     aplicarSombraIcone();
+    aplicarSombraFundo();
+    aplicarPatternFundo();
     atualizarFiltroEvento();
   }
   
